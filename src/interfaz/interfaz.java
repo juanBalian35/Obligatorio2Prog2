@@ -1,15 +1,28 @@
 
 package interfaz;
 
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
 public class interfaz extends javax.swing.JFrame {
-
     private JButton[][] botones;
   
     public interfaz() {
         initComponents();
+        
+        panelJuego.setLayout(new GridLayout(8,9));
+        botones = new JButton[9][10];
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 9; j++) {
+                JButton jButton = new JButton();
+                jButton.addActionListener(new ListenerBoton(i, j));
+                panelJuego.add(jButton);
+                botones[i][j] = jButton;
+            }
+        }
     }
 
     /**
@@ -47,7 +60,6 @@ public class interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     public static void main(String args[]) {
         
         /* Set the Nimbus look and feel */
@@ -79,6 +91,27 @@ public class interfaz extends javax.swing.JFrame {
                 new interfaz().setVisible(true);
             }
         });
+    }
+    
+    private class ListenerBoton implements ActionListener {
+        private int x;
+        private int y;
+        public ListenerBoton(int i, int j) {
+            // en el constructor se almacena la fila y columna que se presionó
+            x = i;
+            y = j;
+        }
+        public void actionPerformed(ActionEvent e) {
+            // cuando se presiona un botón, se ejecutará este método
+            clickBoton(x, y);
+        }
+    }
+    
+    private void clickBoton(int fila, int columna) {
+        // Método a completar!.
+        // En fila y columna se reciben las coordenas donde presionó el usuario, relativas al comienzo de la grilla
+        // fila 1 y columna 1 corresponden a la posición de arriba a la izquierda.
+        // Debe indicarse cómo responder al click de ese botón.
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
