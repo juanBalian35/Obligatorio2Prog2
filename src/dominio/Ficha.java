@@ -6,6 +6,7 @@ package dominio;
  *   Juan Balian - 211150
  *   Agustín Introini - 211064
  * */
+//me gusta el queso cheddar
 public class Ficha {
     public static final String RESET = "\u001B[0m";
     public static final String ROJO = "\u001B[31m";
