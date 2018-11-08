@@ -17,7 +17,7 @@ public class Ficha {
     private int numero;
     private boolean esRojo;
 
-    Ficha(int x, int y, int numero, boolean b){
+    public Ficha(int x, int y, int numero, boolean b){
         this.x = x;
         this.y = y;
         this.numero = numero;

@@ -1,6 +1,10 @@
 
 package interfaz;
 
+import dominio.Ficha;
+import dominio.Jugador;
+import dominio.Tablero;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,13 +17,41 @@ public class interfaz extends javax.swing.JFrame {
     public interfaz() {
         initComponents();
         
+        Jugador jugador1 = new Jugador("juan", "ote", 25);
+        Jugador jugador2 = new Jugador("agustin", "ote2", 25);
+       
+        
+        Ficha[] fichas1 = jugador1.getFichas();
+        Ficha[] fichas2 = jugador2.getFichas();
+
+        // Ubicamos las fichas
+        for(int i = 0; i < Jugador.NUM_FICHAS; ++i){
+            Ficha ficha = new Ficha(i, Tablero.LARGO - 1, Jugador.NUM_FICHAS-i, true);
+            fichas1[i] = ficha;
+
+            ficha = new Ficha(Tablero.ANCHO - 1 - i, 0, Jugador.NUM_FICHAS-i, false);
+            fichas2[i] = ficha;
+        }
+
+        jugador1.setFichas(fichas1);
+        jugador2.setFichas(fichas2);
+
         panelJuego.setLayout(new GridLayout(8,9));
         botones = new JButton[9][10];
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 9; j++) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 9; j++) {
                 JButton jButton = new JButton();
                 jButton.addActionListener(new ListenerBoton(i, j));
                 panelJuego.add(jButton);
+                for(Ficha ficha : jugador1.getFichas()){
+                    if(i == ficha.getY() && j == ficha.getX())
+                        jButton.setBackground(Color.RED);
+                }
+                for(Ficha ficha : jugador2.getFichas()){
+                    if(i == ficha.getY() && j == ficha.getX())
+                        jButton.setBackground(Color.BLUE);
+                }
+                
                 botones[i][j] = jButton;
             }
         }

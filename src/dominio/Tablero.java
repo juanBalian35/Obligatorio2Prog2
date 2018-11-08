@@ -15,7 +15,7 @@ public class Tablero {
 
     private Ficha[][] matriz;
 
-    Tablero(){
+    public Tablero(){
         matriz = new Ficha[LARGO][ANCHO];
     }
 
