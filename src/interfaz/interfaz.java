@@ -6,20 +6,21 @@ import dominio.Jugador;
 import dominio.Tablero;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 
 
 public class interfaz extends javax.swing.JFrame {
     private JButton[][] botones;
-  
+    Tablero tablero = new Tablero();
+    Jugador jugador1 = new Jugador("juan", "ote", 25);
+    Jugador jugador2 = new Jugador("agustin", "ote2", 25);
+    
     public interfaz() {
         initComponents();
-        
-        Jugador jugador1 = new Jugador("juan", "ote", 25);
-        Jugador jugador2 = new Jugador("agustin", "ote2", 25);
-       
         
         Ficha[] fichas1 = jugador1.getFichas();
         Ficha[] fichas2 = jugador2.getFichas();
@@ -38,24 +39,34 @@ public class interfaz extends javax.swing.JFrame {
 
         panelJuego.setLayout(new GridLayout(8,9));
         botones = new JButton[9][10];
+        
+        tablero.actualizar(jugador1, jugador2);
+        
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 9; j++) {
                 JButton jButton = new JButton();
+                jButton.setBackground(Color.GRAY);
                 jButton.addActionListener(new ListenerBoton(i, j));
                 panelJuego.add(jButton);
                 for(Ficha ficha : jugador1.getFichas()){
-                    if(i == ficha.getY() && j == ficha.getX())
+                    if(i == ficha.getY() && j == ficha.getX()){
                         jButton.setBackground(Color.RED);
+                        jButton.setText(ficha.getNumero() + "");
+                    }
                 }
                 for(Ficha ficha : jugador2.getFichas()){
-                    if(i == ficha.getY() && j == ficha.getX())
+                    if(i == ficha.getY() && j == ficha.getX()){
                         jButton.setBackground(Color.BLUE);
+                        jButton.setText(ficha.getNumero() + "");
+                    }
                 }
                 
                 botones[i][j] = jButton;
+                botones[i][j].setMargin(new Insets(-5, -5, -5, -5)); 
             }
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -212,10 +223,28 @@ public class interfaz extends javax.swing.JFrame {
     }
     
     private void clickBoton(int fila, int columna) {
-        // Método a completar!.
-        // En fila y columna se reciben las coordenas donde presionó el usuario, relativas al comienzo de la grilla
-        // fila 1 y columna 1 corresponden a la posición de arriba a la izquierda.
-        // Debe indicarse cómo responder al click de ese botón.
+        boolean esVacia = botones[fila][columna].getBackground() == Color.GRAY ;
+        boolean esJugador1 = botones[fila][columna].getBackground() == Color.RED;
+        
+        if(esVacia)
+            System.out.println("vaciasa");
+        else{
+            if (esJugador1)
+                System.out.print("jugor uno: ");
+            else
+                System.out.print("jugor dos: ");
+            int num = Integer.parseInt(botones[fila][columna].getText());
+            
+            System.out.println("ficha num " + num);
+            
+            ArrayList<Integer> ali = tablero.fichasValidas(jugador1.getFichas()[num-1], esJugador1);
+            System.out.println("Validas:");
+            for(Integer i : ali){
+                System.out.println(i);
+            }
+            
+            //.... TODO: terminar TODOOOOOOOO TODO TODO TODO TODO
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
