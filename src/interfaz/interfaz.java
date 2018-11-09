@@ -81,15 +81,16 @@ public class interfaz extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         panelJuego = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuPartida = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuJugador = new javax.swing.JMenu();
+        agregarJugador = new javax.swing.JMenuItem();
+        ranking = new javax.swing.JMenuItem();
+        ayuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAutoRequestFocus(false);
 
         jButton1.setText("Iniciar partida");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,33 +124,33 @@ public class interfaz extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Partida");
+        jMenuPartida.setText("Partida");
 
         jMenuItem2.setText("Nueva partida");
-        jMenu1.add(jMenuItem2);
+        jMenuPartida.add(jMenuItem2);
 
         jMenuItem1.setText("Replicar partida");
-        jMenu1.add(jMenuItem1);
+        jMenuPartida.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuPartida);
 
-        jMenu3.setText("Jugador");
+        jMenuJugador.setText("Jugador");
 
-        jMenuItem3.setText("Agregar jugador");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        agregarJugador.setText("Agregar jugador");
+        agregarJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                agregarJugadorActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        jMenuJugador.add(agregarJugador);
 
-        jMenuItem4.setText("Ranking");
-        jMenu3.add(jMenuItem4);
+        ranking.setText("Ranking");
+        jMenuJugador.add(ranking);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenuJugador);
 
-        jMenu2.setText("Ayuda");
-        jMenuBar1.add(jMenu2);
+        ayuda.setText("Ayuda");
+        jMenuBar1.add(ayuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -171,9 +172,11 @@ public class interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void agregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarJugadorActionPerformed
+        agregarJugador ventana= new agregarJugador();
+        ventana.setVisible(true);
+        
+    }//GEN-LAST:event_agregarJugadorActionPerformed
 
     public static void main(String args[]) {
         
@@ -248,16 +251,16 @@ public class interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem agregarJugador;
+    private javax.swing.JMenu ayuda;
     private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu jMenuJugador;
+    private javax.swing.JMenu jMenuPartida;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelJuego;
+    private javax.swing.JMenuItem ranking;
     // End of variables declaration//GEN-END:variables
 }
