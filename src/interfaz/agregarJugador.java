@@ -55,11 +55,12 @@ public class agregarJugador extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(350, 200));
         getContentPane().setLayout(null);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
         jLabel1.setText("Nombre:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 17, -1, -1));
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(20, 17, 59, 15);
 
         txtNombre.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
         txtNombre.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -72,15 +73,18 @@ public class agregarJugador extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 12, 100, -1));
+        jPanel1.add(txtNombre);
+        txtNombre.setBounds(80, 12, 100, 25);
 
         lblErrorNombre.setFont(new java.awt.Font("Heiti SC", 0, 10)); // NOI18N
         lblErrorNombre.setForeground(new java.awt.Color(255, 51, 51));
-        jPanel1.add(lblErrorNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 37, 110, 20));
+        jPanel1.add(lblErrorNombre);
+        lblErrorNombre.setBounds(85, 37, 110, 20);
 
         jLabel2.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
         jLabel2.setText("Alias:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 60, -1, -1));
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(42, 57, 40, 20);
 
         txtAlias.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
         txtAlias.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,20 +92,24 @@ public class agregarJugador extends javax.swing.JFrame {
                 txtAliasMouseClicked(evt);
             }
         });
-        jPanel1.add(txtAlias, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 55, 100, -1));
+        jPanel1.add(txtAlias);
+        txtAlias.setBounds(80, 55, 100, 25);
 
         lblErrorAlias.setFont(new java.awt.Font("Heiti SC", 0, 10)); // NOI18N
         lblErrorAlias.setForeground(new java.awt.Color(255, 51, 51));
-        jPanel1.add(lblErrorAlias, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 80, 110, 20));
+        jPanel1.add(lblErrorAlias);
+        lblErrorAlias.setBounds(85, 80, 110, 20);
 
         jLabel3.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
         jLabel3.setText("Edad:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 103, -1, 20));
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(37, 103, 42, 20);
 
         spinnerEdad.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
         spinnerEdad.setModel(new javax.swing.SpinnerNumberModel(6, 6, 120, 1));
         ((DefaultEditor) spinnerEdad.getEditor()).getTextField().setEditable(false);
-        jPanel1.add(spinnerEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 52, -1));
+        jPanel1.add(spinnerEdad);
+        spinnerEdad.setBounds(80, 100, 52, 26);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 10, 210, 150);
