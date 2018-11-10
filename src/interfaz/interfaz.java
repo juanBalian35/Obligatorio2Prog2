@@ -90,7 +90,6 @@ public class interfaz extends javax.swing.JFrame {
         ayuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAutoRequestFocus(false);
 
         jButton1.setText("Iniciar partida");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +168,8 @@ public class interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void agregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarJugadorActionPerformed

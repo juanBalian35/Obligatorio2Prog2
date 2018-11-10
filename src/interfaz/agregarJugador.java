@@ -44,15 +44,17 @@ public class agregarJugador extends javax.swing.JFrame {
         spinnerEdad = new javax.swing.JSpinner();
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar jugador");
         setAlwaysOnTop(true);
-        setMinimumSize(new java.awt.Dimension(350, 200));
+        setBounds(new java.awt.Rectangle(0, 23, 346, 198));
+        setMinimumSize(new java.awt.Dimension(346, 198));
         setName("agregarJugador"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(350, 200));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(346, 198));
         setResizable(false);
-        setSize(new java.awt.Dimension(350, 200));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -112,7 +114,7 @@ public class agregarJugador extends javax.swing.JFrame {
         spinnerEdad.setBounds(80, 100, 52, 26);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 10, 210, 150);
+        jPanel1.setBounds(10, 50, 210, 150);
 
         btnAgregar.setFont(new java.awt.Font("Heiti TC", 0, 14)); // NOI18N
         btnAgregar.setText("Agregar");
@@ -122,7 +124,7 @@ public class agregarJugador extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAgregar);
-        btnAgregar.setBounds(230, 20, 100, 50);
+        btnAgregar.setBounds(230, 60, 100, 50);
 
         btnCancelar.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -132,7 +134,13 @@ public class agregarJugador extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCancelar);
-        btnCancelar.setBounds(230, 90, 100, 50);
+        btnCancelar.setBounds(230, 130, 100, 50);
+
+        jLabel4.setFont(new java.awt.Font("Heiti TC", 1, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Registrar jugador");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, 20, 350, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -148,9 +156,7 @@ public class agregarJugador extends javax.swing.JFrame {
       }else{
           nombre = txtNombre.getText();
       }
-      //TODO:borrar jugador
-        Jugador jugador1 = new Jugador("juan", "ote", 25);
-       sistema.registrarJugador(jugador1);
+      
       if(txtAlias.getText().isEmpty()){
           lblErrorAlias.setVisible(true);
           lblErrorAlias.setText("Ingrese un alias");
@@ -165,9 +171,12 @@ public class agregarJugador extends javax.swing.JFrame {
       if(!alias.isEmpty() && !nombre.isEmpty()){
           Jugador jugador = new Jugador(nombre, alias, edad);
           String [] botones = { "Agregar", "Cancelar"};
-          if(JOptionPane.showOptionDialog (this, "¿Está seguro que desea agregar a este jugador?", "Agregar jugador", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
+          if(JOptionPane.showOptionDialog (this, "¿Está seguro que desea agregar a este jugador?", "Agregar jugador", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
             
           sistema.registrarJugador(jugador);   
+          
+          JOptionPane.showMessageDialog(this, "El jugador ha sido agregado exitosamente","Jugador agregado",JOptionPane.PLAIN_MESSAGE);
+          this.dispose();
           }
           
       }
@@ -231,6 +240,7 @@ public class agregarJugador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblErrorAlias;
     private javax.swing.JLabel lblErrorNombre;
