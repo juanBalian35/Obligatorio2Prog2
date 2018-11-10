@@ -144,6 +144,11 @@ public class interfaz extends javax.swing.JFrame {
         jMenuJugador.add(agregarJugador);
 
         ranking.setText("Ranking");
+        ranking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rankingActionPerformed(evt);
+            }
+        });
         jMenuJugador.add(ranking);
 
         jMenuBar1.add(jMenuJugador);
@@ -178,6 +183,11 @@ public class interfaz extends javax.swing.JFrame {
         ventana.setVisible(true);
         
     }//GEN-LAST:event_agregarJugadorActionPerformed
+
+    private void rankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingActionPerformed
+        
+        Ranking ventana= new Ranking();
+        ventana.setVisible(true);    }//GEN-LAST:event_rankingActionPerformed
 
     public static void main(String args[]) {
         

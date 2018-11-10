@@ -5,26 +5,22 @@
  */
 package interfaz;
 
-import dominio.Jugador;
+
 import dominio.Sistema;
-import java.util.ArrayList;
-import java.util.Collections;
-import javax.swing.JOptionPane;
-import javax.swing.JSpinner.DefaultEditor;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author agustinintroini
  */
 public class Ranking extends javax.swing.JFrame {
-
-    /**
-     * Creates new form agregarJugador
-     */
+   
     public Ranking() {
         initComponents();
         
+        
+
+                  
     }
 
     /**
@@ -38,8 +34,8 @@ public class Ranking extends javax.swing.JFrame {
 
         btnSalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTablaRanking = new javax.swing.JTable();
+        jSP = new javax.swing.JScrollPane();
+        jTabla = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -69,19 +65,14 @@ public class Ranking extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 20, 470, 30);
 
-        jTablaRanking.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
+        jTabla.setModel(new javax.swing.table.DefaultTableModel(
+            Sistema.ranking(),
             new String [] {
-                "N°", "Nombre", "Alias", "Edad", "Partidas ganadas"
+                "nro", "nombre", "alias", "edad", "cant ganadas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -95,12 +86,17 @@ public class Ranking extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTablaRanking.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
-        jTablaRanking.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTablaRanking);
+        jTabla.setOpaque(false);
+        jSP.setViewportView(jTabla);
+        if (jTabla.getColumnModel().getColumnCount() > 0) {
+            jTabla.getColumnModel().getColumn(0).setResizable(false);
+            jTabla.getColumnModel().getColumn(2).setResizable(false);
+            jTabla.getColumnModel().getColumn(3).setResizable(false);
+            jTabla.getColumnModel().getColumn(4).setResizable(false);
+        }
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 60, 430, 80);
+        getContentPane().add(jSP);
+        jSP.setBounds(20, 50, 430, 90);
 
         jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -113,45 +109,37 @@ public class Ranking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();
+        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+public static void agregar(String matriz[][]){
+    jTabla.setModel(new javax.swing.table.DefaultTableModel(
+            matriz,
+            new String [] {
+                "nro", "nombre", "alias", "edad", "cant ganadas"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+}
+   
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-      Sistema sistema = new Sistema();
-        Jugador jugador1 = new Jugador("juan", "ote", 25,12);
-        Jugador jugador2 = new Jugador("agustin", "ote2", 25,12);
-        sistema.registrarJugador(jugador1);
-        sistema.registrarJugador(jugador2);
- 
-      ArrayList<Jugador> jugadores = Sistema.getJugadores();
-       
-      Collections.sort(jugadores);
-
-        if (!jugadores.isEmpty()) {
-            Jugador jugadorAnterior = jugadores.get(0);
-            DefaultTableModel model = (DefaultTableModel) jTablaRanking.getModel();
-            int posicion = 1;
-            for (int i = 0; i < jugadores.size(); i++) {
-                Jugador j1 = jugadores.get(i);
-                if (jugadorAnterior.getpGanadas() == j1.getpGanadas()){
-                    
-                    model.addRow(new Object[]{posicion,j1.getNombre(),j1.getAlias(), j1.getEdad(), j1.getpGanadas()});
-                    
-                }else {
-                    posicion = i + 1;
-                    model.addRow(new Object[]{posicion,j1.getNombre(),j1.getAlias(), j1.getEdad(), j1.getpGanadas()});
-                }
-
-                jugadorAnterior = jugadores.get(i);
-            }
-            System.out.println("");
-        
-    
-    }    
-    
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -183,7 +171,7 @@ public class Ranking extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private static javax.swing.JScrollPane jScrollPane1;
-    private static javax.swing.JTable jTablaRanking;
+    private javax.swing.JScrollPane jSP;
+    private static javax.swing.JTable jTabla;
     // End of variables declaration//GEN-END:variables
 }

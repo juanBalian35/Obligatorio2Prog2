@@ -3,6 +3,7 @@ package dominio;
 
 
 import java.util.*;
+import javax.swing.JLabel;
 
 /*
  * Creado por:
@@ -14,7 +15,8 @@ public class Sistema {
     private Scanner scanner = new Scanner(System.in);
     private static ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private ArrayList<Partida> partidas = new ArrayList<>();
-    
+    static Jugador jugador1 = new Jugador("juan", "ote", 25,12);
+      static  Jugador jugador2 = new Jugador("agustin", "ote2", 25,12);
     
     public ArrayList<Partida> getPartidas() {
         return partidas;
@@ -31,7 +33,7 @@ public class Sistema {
         this.jugadores = jugadores;
     }
 
-    public void registrarJugador(Jugador jugador){
+    public static void registrarJugador(Jugador jugador){
         jugadores.add(jugador);
     }
 
@@ -100,8 +102,58 @@ public class Sistema {
         partidaReplicar.setTablero(tablero);
         partidaReplicar.mostrarGanador(false);
     }
+public static String[][] ranking(){
+   
+    
+       registrarJugador(jugador1);
+        registrarJugador(jugador2);
+       
+        String matriz[][] = new String[jugadores.size()][5];
+       
+       
+      Collections.sort(jugadores);
+      
+        if (!jugadores.isEmpty()) {
+            
+          
+            
+            Jugador jugadorAnterior = jugadores.get(0);
+            int posicion = 1;
+            for (int i = 0; i < jugadores.size(); i++) {
+                Jugador j1 = jugadores.get(i);
+                if (jugadorAnterior.getpGanadas() == j1.getpGanadas()){
+                  
+                   matriz[i][0]=Integer.toString(posicion);
+                   matriz[i][1]= j1.getNombre();
+                   matriz[i][2]= j1.getAlias();
+                   matriz[i][3]= Integer.toString(j1.getEdad());
+                   matriz[i][4]= Integer.toString(j1.getpGanadas());
+                   
+                   
+                            
+                    
+                    
+                    
+                }else {
+                    posicion = i + 1;
+                   matriz[i][0]=Integer.toString(posicion);
+                   matriz[i][1]= j1.getNombre();
+                   matriz[i][2]= j1.getAlias();
+                   matriz[i][3]= Integer.toString(j1.getEdad());
+                   matriz[i][4]= Integer.toString(j1.getpGanadas());
+                    
+                            
+                }
 
-    public void ranking() {
+                jugadorAnterior = jugadores.get(i);
+            }
+           
+        
+    
+    }    
+        return matriz;
+}
+   /* public void ranking() {
         System.out.println("");
         System.out.println("+---------------------------------------------+");
         System.out.println("|RANKING DE JUGADORES CON MAS PARTIDAS GANADAS|");
@@ -129,7 +181,7 @@ public class Sistema {
             }
             System.out.println("");
         }
-    }
+    }*/
 
     public Jugador buscarJugador(String alias){
         for(Jugador jugador : jugadores)
