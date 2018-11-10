@@ -4,6 +4,7 @@ package interfaz;
 import dominio.Ficha;
 import dominio.Jugador;
 import dominio.Tablero;
+import dominio.Sistema;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Insets;
@@ -190,7 +191,10 @@ public class interfaz extends javax.swing.JFrame {
         ventana.setVisible(true);    }//GEN-LAST:event_rankingActionPerformed
 
     public static void main(String args[]) {
-        
+         Jugador jugador1 = new Jugador("juan", "ote", 25,12);
+       Jugador jugador2 = new Jugador("agustin", "ote2", 25,12);
+      Sistema.registrarJugador(jugador1);
+        Sistema.registrarJugador(jugador2);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

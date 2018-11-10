@@ -15,8 +15,7 @@ public class Sistema {
     private Scanner scanner = new Scanner(System.in);
     private static ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private ArrayList<Partida> partidas = new ArrayList<>();
-    static Jugador jugador1 = new Jugador("juan", "ote", 25,12);
-      static  Jugador jugador2 = new Jugador("agustin", "ote2", 25,12);
+    
     
     public ArrayList<Partida> getPartidas() {
         return partidas;
@@ -105,8 +104,7 @@ public class Sistema {
 public static String[][] ranking(){
    
     
-       registrarJugador(jugador1);
-        registrarJugador(jugador2);
+       
        
         String matriz[][] = new String[jugadores.size()][5];
        

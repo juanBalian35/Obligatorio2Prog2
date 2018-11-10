@@ -65,10 +65,11 @@ public class Ranking extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 20, 470, 30);
 
+        jTabla.setFont(new java.awt.Font("Heiti SC", 0, 12)); // NOI18N
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             Sistema.ranking(),
             new String [] {
-                "nro", "nombre", "alias", "edad", "cant ganadas"
+                "N°", "Nombre", "Alias", "Edad", "N° de ganadas"
             }
         ) {
             Class[] types = new Class [] {
@@ -86,8 +87,11 @@ public class Ranking extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTabla.setOpaque(false);
+        jTabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        jTabla.setShowGrid(false);
+        jTabla.getTableHeader().setReorderingAllowed(false);
         jSP.setViewportView(jTabla);
+        jTabla.getColumnModel().getColumn(0).setPreferredWidth(10);
         if (jTabla.getColumnModel().getColumnCount() > 0) {
             jTabla.getColumnModel().getColumn(0).setResizable(false);
             jTabla.getColumnModel().getColumn(2).setResizable(false);
