@@ -8,6 +8,13 @@ package dominio;
  * */
 
 public class Jugador implements Comparable<Jugador> {
+
+    public Jugador(String alias, String nombre, int edad, int pGanadas) {
+        this.alias = alias;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.pGanadas = pGanadas;
+    }
     public static final int NUM_FICHAS = 8;
 
     private String alias;

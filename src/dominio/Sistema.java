@@ -14,7 +14,8 @@ public class Sistema {
     private Scanner scanner = new Scanner(System.in);
     private static ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private ArrayList<Partida> partidas = new ArrayList<>();
-
+    
+    
     public ArrayList<Partida> getPartidas() {
         return partidas;
     }

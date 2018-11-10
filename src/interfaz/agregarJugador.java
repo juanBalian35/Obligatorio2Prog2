@@ -55,6 +55,7 @@ public class agregarJugador extends javax.swing.JFrame {
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(346, 198));
         setResizable(false);
+        setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
@@ -138,7 +139,7 @@ public class agregarJugador extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Heiti TC", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Registrar jugador");
+        jLabel4.setText("Agregar jugador");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 20, 350, 30);
 
