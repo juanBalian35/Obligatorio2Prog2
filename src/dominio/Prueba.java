@@ -135,7 +135,7 @@ public class Prueba {
                     int opcion = ingresarEnteroEnRango(scanner,1,3,"Eleccion: ");
 
                     Date fecha = GregorianCalendar.getInstance().getTime();
-                    sistema.jugar(j1, j2, opcion,fecha);
+                    //sistema.jugar(j1, j2, opcion,fecha);
 
                     break;
                 case "3":

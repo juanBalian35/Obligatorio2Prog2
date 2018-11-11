@@ -36,10 +36,10 @@ public class Sistema {
         jugadores.add(jugador);
     }
 
-    public void jugar(Jugador jugador1, Jugador jugador2, int formaDeTerminar, Date fecha){
+    /*public void jugar(Jugador jugador1, Jugador jugador2, int formaDeTerminar, Date fecha){
         Partida partida = new Partida(jugador1, jugador2, formaDeTerminar, fecha);
-        partidas.add(partida.comenzar());
-    }
+        //partidas.add(partida.comenzar());
+    }*/
 
     public void replicar(){
         Collections.sort(partidas);
@@ -55,9 +55,9 @@ public class Sistema {
         Partida partidaReplicar = partidas.get(opcion - 1);
         Tablero tablero = new Tablero();
         partidaReplicar.inicializarFichas();
-        System.out.println("Inicia la partida entre " + partidaReplicar.getJugador1().getAlias() + " y " + partidaReplicar.getJugador2().getAlias());
-        tablero.actualizar(partidaReplicar.getJugador1(), partidaReplicar.getJugador2());
-        tablero.mostrar(true);
+       /* System.out.println("Inicia la partida entre " + partidaReplicar.getJugador1().getAlias() + " y " + partidaReplicar.getJugador2().getAlias());
+        tablero.actualizar(partidaReplicar.getJugador1(), partidaReplicar.getJugador2());*/
+        //tablero.mostrar(true);
         System.out.print("Presione Enter para continuar...");
         scanner.nextLine();
 
@@ -81,25 +81,25 @@ public class Sistema {
             }
             String alias;
 
-            if (mov.charAt(4) == '1') {
-                Partida.hacerMovimiento(mov, partidaReplicar.getJugador1(), true);
+            /*if (mov.charAt(4) == '1') {
+                //Partida.hacerMovimiento(mov, partidaReplicar.getJugador1(), true);
                 alias = Ficha.ROJO + partidaReplicar.getJugador1().getAlias() + Ficha.RESET;
             }
             else {
-                Partida.hacerMovimiento(mov, partidaReplicar.getJugador2(), false);
+                //Partida.hacerMovimiento(mov, partidaReplicar.getJugador2(), false);
                 alias = Ficha.AZUL + partidaReplicar.getJugador2().getAlias() + Ficha.RESET;
             }
-            tablero.actualizar(partidaReplicar.getJugador1(), partidaReplicar.getJugador2());
+            tablero.actualizar(partidaReplicar.getJugador1(), partidaReplicar.getJugador2());*/
 
-            tablero.mostrar(true);
+            //tablero.mostrar(true);
             System.out.println();
-            System.out.println(alias + " movió la ficha " + mov.charAt(0) + " hacia " + posicion);
+            //System.out.println(alias + " movió la ficha " + mov.charAt(0) + " hacia " + posicion);
             System.out.print("Presione Enter para continuar...");
             scanner.nextLine();
         }
 
         partidaReplicar.setTablero(tablero);
-        partidaReplicar.mostrarGanador(false);
+        /*partidaReplicar.mostrarGanador(false);*/
     }
 public static String[][] ranking(){
    

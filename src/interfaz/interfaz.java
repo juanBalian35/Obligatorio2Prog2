@@ -3,6 +3,7 @@ package interfaz;
 
 import dominio.Ficha;
 import dominio.Jugador;
+import dominio.Partida;
 import dominio.Tablero;
 import dominio.Sistema;
 import java.awt.Color;
@@ -11,37 +12,26 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import javax.swing.*;
 
 
 public class interfaz extends javax.swing.JFrame {
     private JButton[][] botones;
     Tablero tablero = new Tablero();
-    Jugador jugador1 = new Jugador("juan", "ote", 25);
-    Jugador jugador2 = new Jugador("agustin", "ote2", 25);
-    
+    Jugador[] jugadores = new Jugador[2];
+    Partida partida;
+    Ficha fichaSeleccionada = null;
+    int jugadorActivo = 0;
+
     public interfaz() {
         initComponents();
         
-        Ficha[] fichas1 = jugador1.getFichas();
-        Ficha[] fichas2 = jugador2.getFichas();
-
-        // Ubicamos las fichas
-        for(int i = 0; i < Jugador.NUM_FICHAS; ++i){
-            Ficha ficha = new Ficha(i, Tablero.LARGO - 1, Jugador.NUM_FICHAS-i, true);
-            fichas1[i] = ficha;
-
-            ficha = new Ficha(Tablero.ANCHO - 1 - i, 0, Jugador.NUM_FICHAS-i, false);
-            fichas2[i] = ficha;
-        }
-
-        jugador1.setFichas(fichas1);
-        jugador2.setFichas(fichas2);
-
-        panelJuego.setLayout(new GridLayout(8,9));
+        jugadores[0] = new Jugador("juan", "ote", 25);
+        jugadores[1] = new Jugador("agustin", "ote2", 25);
+        partida = new Partida(jugadores, 2, GregorianCalendar.getInstance().getTime());
+       
         botones = new JButton[9][10];
-        
-        tablero.actualizar(jugador1, jugador2);
         
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 9; j++) {
@@ -49,25 +39,60 @@ public class interfaz extends javax.swing.JFrame {
                 jButton.setBackground(Color.GRAY);
                 jButton.addActionListener(new ListenerBoton(i, j));
                 panelJuego.add(jButton);
-                for(Ficha ficha : jugador1.getFichas()){
-                    if(i == ficha.getY() && j == ficha.getX()){
-                        jButton.setBackground(Color.RED);
-                        jButton.setText(ficha.getNumero() + "");
-                    }
-                }
-                for(Ficha ficha : jugador2.getFichas()){
-                    if(i == ficha.getY() && j == ficha.getX()){
-                        jButton.setBackground(Color.BLUE);
-                        jButton.setText(ficha.getNumero() + "");
-                    }
-                }
                 
                 botones[i][j] = jButton;
                 botones[i][j].setMargin(new Insets(-5, -5, -5, -5)); 
             }
         }
+        
+        actualizar(null);
     }
 
+    private void actualizar(ArrayList<Integer> fichasValidas){
+        for(int i = 0; i < 8; ++i){
+            for(int j = 0; j < 9; ++j){
+                botones[i][j].setBackground(Color.GRAY);
+                botones[i][j].setText("");
+            }
+        }
+        for(int i = 0; i < jugadores.length; ++i){
+            for(Ficha ficha : jugadores[i].getFichas()){
+                int y = ficha.getY(), x = ficha.getX();
+
+                JButton boton = botones[y][x];
+
+                Color background;
+                if(i == 0){
+                    if (jugadorActivo == 0){
+                        if(fichasValidas == null)
+                            background = Color.RED;
+                        else if (fichasValidas.contains(ficha.getNumero()))
+                            background = Color.RED;
+                        else
+                            background = Color.ORANGE;
+                    }
+                    else
+                        background = Color.ORANGE;
+                }
+                else{
+                    if (jugadorActivo == 1){
+                        if(fichasValidas == null)
+                            background = Color.BLUE;
+                        else if (fichasValidas.contains(ficha.getNumero()))
+                            background = Color.BLUE;
+                        else
+                            background = Color.CYAN;
+                    }
+                    else
+                        background = Color.CYAN;
+                }
+                
+                boton.setBackground(background);
+                boton.setText(ficha.getNumero() + "");
+            }
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -241,27 +266,51 @@ public class interfaz extends javax.swing.JFrame {
     }
     
     private void clickBoton(int fila, int columna) {
-        boolean esVacia = botones[fila][columna].getBackground() == Color.GRAY ;
-        boolean esJugador1 = botones[fila][columna].getBackground() == Color.RED;
-        
-        if(esVacia)
-            System.out.println("vaciasa");
-        else{
-            if (esJugador1)
-                System.out.print("jugor uno: ");
-            else
-                System.out.print("jugor dos: ");
-            int num = Integer.parseInt(botones[fila][columna].getText());
-            
-            System.out.println("ficha num " + num);
-            
-            ArrayList<Integer> ali = tablero.fichasValidas(jugador1.getFichas()[num-1], esJugador1);
-            System.out.println("Validas:");
-            for(Integer i : ali){
-                System.out.println(i);
+        if (fichaSeleccionada == null && botones[fila][columna].getBackground() != Color.GRAY){
+            boolean esJugadorUno = botones[fila][columna].getBackground() == Color.RED;
+
+            if(!((jugadorActivo == 0 && esJugadorUno) || (jugadorActivo == 1 && !esJugadorUno))){
+                System.out.println("cual haces");
+                return;
             }
             
-            //.... TODO: terminar TODOOOOOOOO TODO TODO TODO TODO
+            ArrayList<Integer> posPos = partida.posicionesPosibles(columna, fila, esJugadorUno);
+
+            for(int i = 0; i < posPos.size(); i+=2)
+                botones[posPos.get(i+1)][posPos.get(i)].setBackground(Color.decode("#50C878"));
+
+
+            int f = Integer.parseInt(botones[fila][columna].getText());
+
+            fichaSeleccionada = new Ficha(columna, fila, f, esJugadorUno);
+        }
+        else if(botones[fila][columna].getBackground().equals(Color.decode("#50C878"))){
+            int mov = columna - fichaSeleccionada.getX();
+            String movi;
+            switch(mov){
+                case 1:
+                    movi="D";
+                    break;
+                case 0:
+                    movi="A";
+                    break;
+                default:
+                    movi="I";
+            }
+            
+            String movimiento = fichaSeleccionada.getNumero() + "," + movi;
+            partida.hacerMovimiento(movimiento, jugadores[jugadorActivo] , fichaSeleccionada.getEsRojo());
+            
+            ArrayList<Integer> a = partida.getTablero().fichasValidas(fichaSeleccionada, jugadorActivo == 0);
+            
+            if(a.size() == 0){
+                jugadorActivo = jugadorActivo == 0 ? 1: 0;
+                actualizar(null);
+            }
+            else
+                actualizar(a);
+            
+            fichaSeleccionada = null;
         }
     }
 

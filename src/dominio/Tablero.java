@@ -19,19 +19,18 @@ public class Tablero {
         matriz = new Ficha[LARGO][ANCHO];
     }
 
-    public void actualizar(Jugador j1, Jugador j2){
+    public void actualizar(Jugador[] jugadores){
         for(int i = 0; i < matriz.length; ++i)
             for(int j = 0; j < matriz[i].length; ++j)
                 matriz[i][j] = null;
 
-        for(Ficha ficha : j1.getFichas())
+        for(Ficha ficha : jugadores[0].getFichas())
             matriz[ficha.getY()][ficha.getX()] = ficha;
 
-        for(Ficha ficha : j2.getFichas())
+        for(Ficha ficha : jugadores[1].getFichas())
             matriz[ficha.getY()][ficha.getX()] = ficha;
     }
-
-    private String lineaSeparatoria(){
+private String lineaSeparatoria(){
         String s = "";
 
         for(int j = 0; j < ANCHO*2+1; ++j)
@@ -52,7 +51,7 @@ public class Tablero {
             System.out.println(reducido ? "" : "\n" + lineaSeparatoria());
         }
     }
-
+    
     public ArrayList<Integer> fichasValidas(Ficha ficha, boolean esJugadorUno){
         ArrayList<Integer> movValidos = new ArrayList<>();
 
@@ -92,8 +91,12 @@ public class Tablero {
             }
         }
 
+        if(!fichasABorrar.contains(ficha.getNumero()))
+            fichasABorrar.add(ficha.getNumero());
+        
         movValidos.removeAll(fichasABorrar);
 
+        
         return movValidos;
     }
 
@@ -175,5 +178,9 @@ public class Tablero {
     }
     public boolean estaPosOcupada(int x, int y){
         return matriz[y][x] != null;
+    }
+    
+    public Ficha[][] getMatriz(){
+        return matriz;
     }
 }

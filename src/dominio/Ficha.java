@@ -52,4 +52,14 @@ public class Ficha {
     public String toString(){
         return (esRojo ? ROJO : AZUL) + getNumero() + RESET;
     }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Ficha){
+            Ficha f = (Ficha) o;
+            
+            return f.x == x && f.y == y && f.esRojo == esRojo && f.numero == numero;
+        }
+        return false;
+    }
 }
