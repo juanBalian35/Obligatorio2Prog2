@@ -11,11 +11,14 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import javax.swing.*;
-
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
 
 public class interfaz extends javax.swing.JFrame {
     private static final Color colorJugadorUnoValido = Color.decode("#ff3300");
@@ -58,6 +61,20 @@ public class interfaz extends javax.swing.JFrame {
         actualizar(null);
     }
 
+    public void reproducirSonido(String direccion)
+ {
+   try 
+   {
+    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(direccion));
+    Clip clip = AudioSystem.getClip( );
+    clip.open(audioInputStream);
+    clip.start( );
+   }
+   catch(Exception ex)
+   {
+     System.out.println("Error al reproducir archivo");
+   }
+ }
     private void actualizar(ArrayList<Integer> fichasValidas){
         for(int i = 0; i < 8; ++i){
             for(int j = 0; j < 9; ++j){
@@ -271,6 +288,7 @@ public class interfaz extends javax.swing.JFrame {
     }
     
     private void clickBoton(int fila, int columna) {
+        reproducirSonido("Bryant_Myers_diciendo_Bryant_Myers-jm140EP3B7w.wav");
         if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
             int mov = columna - fichaSeleccionada.getX();
             
