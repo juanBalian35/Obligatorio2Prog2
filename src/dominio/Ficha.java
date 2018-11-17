@@ -50,7 +50,7 @@ public class Ficha {
 
     @Override
     public String toString(){
-        return (esRojo ? ROJO : AZUL) + getNumero() + RESET;
+        return (esRojo ? ROJO : AZUL) + getNumero() + RESET + ": (" +  x +  "," + y + ")";
     }
     
     @Override

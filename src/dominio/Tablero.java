@@ -30,27 +30,7 @@ public class Tablero {
         for(Ficha ficha : jugadores[1].getFichas())
             matriz[ficha.getY()][ficha.getX()] = ficha;
     }
-private String lineaSeparatoria(){
-        String s = "";
-
-        for(int j = 0; j < ANCHO*2+1; ++j)
-            s += ((j % 2 == 0 ? "+" : "-"));
-
-        return s;
-    }
-
-    public void mostrar(boolean reducido){
-        System.out.println(reducido ? "" : lineaSeparatoria());
-        for(int i = 0; i < LARGO; ++i){
-            for(int j = 0; j < ANCHO; ++j){
-                System.out.print(reducido ? " " : "|");
-                System.out.print((matriz[i][j] == null ? (reducido ? "-" : " ") : matriz[i][j]));
-                System.out.print(reducido ? " " : (j == ANCHO - 1 ? "|" : ""));
-            }
-
-            System.out.println(reducido ? "" : "\n" + lineaSeparatoria());
-        }
-    }
+    
     
     public ArrayList<Integer> fichasValidas(Ficha ficha, boolean esJugadorUno){
         ArrayList<Integer> movValidos = new ArrayList<>();
@@ -58,7 +38,7 @@ private String lineaSeparatoria(){
         int[] s1 = sumaDiagonales(ficha);
         int s2 = sumaHorizontal(ficha);
         int s3 = sumaVertical(ficha);
-
+        
         if(s1[0] <= Jugador.NUM_FICHAS)
             movValidos.add(s1[0]);
         if(s1[1] <= Jugador.NUM_FICHAS)
@@ -96,7 +76,6 @@ private String lineaSeparatoria(){
         
         movValidos.removeAll(fichasABorrar);
 
-        
         return movValidos;
     }
 
@@ -182,5 +161,28 @@ private String lineaSeparatoria(){
     
     public Ficha[][] getMatriz(){
         return matriz;
+    }
+    
+    //DEBUG: koakoakoakoala
+    private String lineaSeparatoria(){
+            String s = "";
+
+            for(int j = 0; j < ANCHO*2+1; ++j)
+                s += ((j % 2 == 0 ? "+" : "-"));
+
+            return s;
+    }
+
+    public void mostrar(boolean reducido){
+        System.out.println(reducido ? "" : lineaSeparatoria());
+        for(int i = 0; i < LARGO; ++i){
+            for(int j = 0; j < ANCHO; ++j){
+                System.out.print(reducido ? " " : "|");
+                System.out.print((matriz[i][j] == null ? (reducido ? "-" : " ") : matriz[i][j]));
+                System.out.print(reducido ? " " : (j == ANCHO - 1 ? "|" : ""));
+            }
+
+            System.out.println(reducido ? "" : "\n" + lineaSeparatoria());
+        }
     }
 }

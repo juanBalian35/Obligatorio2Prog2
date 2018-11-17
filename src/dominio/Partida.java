@@ -44,6 +44,10 @@ public class Partida implements Comparable<Partida> {
         return tablero;
     }
 
+    public Jugador[] getJugadores(){
+        return jugadores;
+    }
+    
     public ArrayList<String> getMovimientos() {
         return movimientos;
     }
@@ -85,12 +89,12 @@ public class Partida implements Comparable<Partida> {
         return asd;
     }
 
-    public void hacerMovimiento(String movimiento, Jugador jugador, boolean esJugadorUno){
+    public ArrayList<Integer> hacerMovimiento(String movimiento, int numJugador){
         String[] a = movimiento.split(",");
 
-        Ficha ficha = fichaAMover(movimiento, jugador);
+        Ficha ficha = fichaAMover(movimiento, jugadores[numJugador]);
 
-        ficha.setY(ficha.getY() + (esJugadorUno ? -1 : 1));
+        ficha.setY(ficha.getY() + (numJugador == 0 ? -1 : 1));
 
         if(a[1].equals("D"))
             ficha.setX(ficha.getX() + 1);
@@ -99,6 +103,8 @@ public class Partida implements Comparable<Partida> {
         
         movimientos.add(movimiento);
         tablero.actualizar(jugadores);
+        
+        return tablero.fichasValidas(ficha, numJugador == 0);
         //tablero.mostrar(true);
     }
 

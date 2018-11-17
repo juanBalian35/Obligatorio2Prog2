@@ -136,7 +136,6 @@ public class Prueba {
 
                     Date fecha = GregorianCalendar.getInstance().getTime();
                     //sistema.jugar(j1, j2, opcion,fecha);
-
                     break;
                 case "3":
                     sistema.replicar();
