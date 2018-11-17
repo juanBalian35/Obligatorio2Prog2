@@ -18,10 +18,10 @@ import javax.swing.*;
 
 
 public class interfaz extends javax.swing.JFrame {
-    private static final Color colorJugadorUnoValido = Color.RED;
-    private static final Color colorJugadorUnoInvalido = Color.ORANGE;
-    private static final Color colorJugadorDosValido = Color.BLUE;
-    private static final Color colorJugadorDosInvalido = Color.CYAN;
+    private static final Color colorJugadorUnoValido = Color.decode("#ff3300");
+    private static final Color colorJugadorUnoInvalido = Color.decode("#a66959");
+    private static final Color colorJugadorDosValido = Color.decode("#0033cc");
+    private static final Color colorJugadorDosInvalido = Color.decode("#475785");
     private static final Color colorMovimientosValidos = Color.decode("#50C878");
    
     private JButton[][] botones;
@@ -45,11 +45,12 @@ public class interfaz extends javax.swing.JFrame {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 9; j++) {
                 JButton jButton = new JButton();
-                jButton.setBackground(Color.GRAY);
+                
                 jButton.addActionListener(new ListenerBoton(i, j));
                 panelJuego.add(jButton);
                 
                 botones[i][j] = jButton;
+                botones[i][j].setForeground(Color.WHITE);
                 botones[i][j].setMargin(new Insets(-5, -5, -5, -5)); 
             }
         }
@@ -73,6 +74,15 @@ public class interfaz extends javax.swing.JFrame {
                 
                 boton.setBackground(background);
                 boton.setText(ficha.getNumero() + "");
+            }
+        }
+    }
+    
+    private void limpiarCeldasVerdes(){
+        for(int i = 0; i < 8; ++i){
+            for(int j = 0; j < 9; ++j){
+                if(botones[i][j].getBackground() == colorMovimientosValidos)
+                    botones[i][j].setBackground(Color.GRAY);
             }
         }
     }
@@ -261,9 +271,29 @@ public class interfaz extends javax.swing.JFrame {
     }
     
     private void clickBoton(int fila, int columna) {
-        if (fichaSeleccionada == null && botones[fila][columna].getBackground() != Color.GRAY){
+        if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
+            int mov = columna - fichaSeleccionada.getX();
+            
+            String movi = "A";
+            if(mov == 1)
+                movi = "D";
+            else if(mov == -1)
+                movi = "I";
+            
+            String movimiento = fichaSeleccionada.getNumero() + "," + movi;
+            ArrayList<Integer> fichasValidas = partida.hacerMovimiento(movimiento, jugadorActivo);
+            
+            if(fichasValidas.isEmpty())
+                jugadorActivo = jugadorActivo == 0 ? 1 : 0;
+            
+            actualizar(fichasValidas.isEmpty() ? null : fichasValidas);
+            fichaSeleccionada = null;
+        }
+        else if (botones[fila][columna].getBackground() != Color.GRAY){
             boolean esJugadorUno = botones[fila][columna].getBackground() == colorJugadorUnoValido;
             boolean esJugadorDos = botones[fila][columna].getBackground() == colorJugadorDosValido;
+            
+            limpiarCeldasVerdes();
             
             if(!((jugadorActivo == 0 && esJugadorUno) || (jugadorActivo == 1 && esJugadorDos))){
                 System.out.println("cual haces");
@@ -280,25 +310,6 @@ public class interfaz extends javax.swing.JFrame {
             partida.getTablero().mostrar(true);
             
             fichaSeleccionada = new Ficha(columna, fila, f, esJugadorUno);
-        }
-        else if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
-            int mov = columna - fichaSeleccionada.getX();
-            
-            String movi = "A";
-            if(mov == 1)
-                movi = "D";
-            else if(mov == -1)
-                movi = "I";
-            
-            String movimiento = fichaSeleccionada.getNumero() + "," + movi;
-            ArrayList<Integer> fichasValidas = partida.hacerMovimiento(movimiento, jugadorActivo);
-            
-            if(fichasValidas.isEmpty())
-                jugadorActivo = jugadorActivo == 0 ? 1 : 0;
-            
-            actualizar(fichasValidas.isEmpty() ? null : fichasValidas);
-            
-            fichaSeleccionada = null;
         }
     }
 
