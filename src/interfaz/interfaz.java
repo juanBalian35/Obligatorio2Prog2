@@ -61,20 +61,17 @@ public class interfaz extends javax.swing.JFrame {
         actualizar(null);
     }
 
-    public void reproducirSonido(String direccion)
- {
-   try 
-   {
+ public void reproducirSonido(String direccion){
+   try {
     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(direccion));
     Clip clip = AudioSystem.getClip( );
     clip.open(audioInputStream);
     clip.start( );
-   }
-   catch(Exception ex)
-   {
+   }catch(Exception ex){
      System.out.println("Error al reproducir archivo");
    }
  }
+ 
     private void actualizar(ArrayList<Integer> fichasValidas){
         for(int i = 0; i < 8; ++i){
             for(int j = 0; j < 9; ++j){
@@ -175,6 +172,11 @@ public class interfaz extends javax.swing.JFrame {
         jMenuPartida.setText("Partida");
 
         jMenuItem2.setText("Nueva partida");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenuPartida.add(jMenuItem2);
 
         jMenuItem1.setText("Replicar partida");
@@ -237,6 +239,12 @@ public class interfaz extends javax.swing.JFrame {
         
         Ranking ventana= new Ranking();
         ventana.setVisible(true);    }//GEN-LAST:event_rankingActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        NuevaPartida nuevaPartida=new NuevaPartida();
+        nuevaPartida.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public static void main(String args[]) {
          Jugador jugador1 = new Jugador("juan", "ote", 25,12);
