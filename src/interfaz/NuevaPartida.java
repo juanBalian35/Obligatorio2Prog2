@@ -7,10 +7,13 @@ package interfaz;
 
 
 import dominio.Jugador;
+import dominio.Partida;
 import dominio.Sistema;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.sound.sampled.AudioSystem;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -271,7 +274,14 @@ public class NuevaPartida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnIniciarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarPartidaActionPerformed
-        // TODO add your handling code here:
+        Partida partida;
+        int formaDeTerminar=jCB_FTerminar.getSelectedIndex()+1;
+        Date fecha = GregorianCalendar.getInstance().getTime();
+        Jugador jugadores[]=new Jugador[2];
+        jugadores[0]=Sistema.getJugadores().get(jListRojo.getSelectedIndex());
+        jugadores[1]=Sistema.getJugadores().get(jListAzul.getSelectedIndex());
+        
+        partida=new Partida (jugadores,formaDeTerminar,fecha);
     }//GEN-LAST:event_btnIniciarPartidaActionPerformed
 
     private void jListRojoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListRojoValueChanged
