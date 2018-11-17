@@ -8,20 +8,74 @@ package interfaz;
 
 import dominio.Jugador;
 import dominio.Sistema;
+import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.sound.sampled.AudioSystem;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JList;
 import javax.swing.JSpinner.DefaultEditor;
-
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.DefaultListSelectionModel;
 
 /**
  *
  * @author agustinintroini
  */
 public class NuevaPartida extends javax.swing.JFrame {
-   
+    int azulElementoNoValido = -1,rojoElementoNoValido = -1;
+    Color colorListaAzul, colorListaRoja;
+    
+    // Hace que el elemento en el indice que sea apropiado no sea clickeable.
+    class SelectionModelInvalidar extends DefaultListSelectionModel {
+        boolean esListaAzul;
+        
+        SelectionModelInvalidar(boolean esListaAzul){
+            this.esListaAzul = esListaAzul;
+        }
+        
+        @Override
+        public void setSelectionInterval(int index0, int index1) {
+            int indiceNoValido = esListaAzul ? azulElementoNoValido : rojoElementoNoValido;
+            
+            if(index0 == indiceNoValido && index1 == indiceNoValido)
+                super.setSelectionInterval(-1, -1);
+            else
+                super.setSelectionInterval(index0, index1);
+        }
+    }
+    
+    // Hace que el elemento en el indice que sea apropiado se vea distinto.
+    private class ListCellRenderer extends DefaultListCellRenderer {
+        boolean esListaAzul;
+        
+        ListCellRenderer(boolean esListaAzul){
+            this.esListaAzul = esListaAzul;
+        }
+        
+        @Override
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            Component comp = super.getListCellRendererComponent(list, value, index, false, false);
+            comp.setEnabled(true);
+            
+            int indiceNoValido = esListaAzul ? azulElementoNoValido : rojoElementoNoValido;
+            
+            if(index == indiceNoValido)
+                comp.setEnabled(false);
+            else if(isSelected)
+                comp.setBackground(esListaAzul ? colorListaAzul : colorListaRoja);
+            
+            return comp;
+        }
+    }
     public NuevaPartida() {
         initComponents();
+        
+        colorListaAzul = jListAzul.getSelectionBackground();
+        colorListaRoja = jListRojo.getSelectionBackground();
         
         if(Sistema.getJugadores().isEmpty()){
             jPanel1.setVisible(false);
@@ -30,17 +84,41 @@ public class NuevaPartida extends javax.swing.JFrame {
         
         llenarLista(Sistema.getJugadores(),jListAzul);
         llenarLista(Sistema.getJugadores(),jListRojo);
-                  
+        
+        ListSelectionListener listener = new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(!e.getValueIsAdjusting()){
+                    boolean esListaAzul = ((JList)e.getSource()).getSelectionBackground().equals(colorListaAzul);
+                    
+                    int seleccion = ((esListaAzul ? jListAzul : jListRojo).getSelectedIndex());
+
+                    if(esListaAzul)
+                        rojoElementoNoValido = seleccion;
+                    else
+                        azulElementoNoValido = seleccion;
+                    
+                    (esListaAzul ? jListRojo : jListAzul).repaint();
+                }
+            }
+        };
+        
+        jListAzul.setSelectionModel(new SelectionModelInvalidar(true));
+        jListAzul.setCellRenderer(new ListCellRenderer(true));
+        jListRojo.setSelectionModel(new SelectionModelInvalidar(false));
+        jListRojo.setCellRenderer(new ListCellRenderer(false));
+        jListAzul.addListSelectionListener(listener);
+        jListRojo.addListSelectionListener(listener);
     }
-public final void llenarLista (ArrayList<Jugador> lista, JList list){
-    DefaultListModel listModel = new DefaultListModel();
-
-for(int i=0; i<lista.size(); i++) {
-    listModel.add(i, lista.get(i).getAlias());
-}
-    list.setModel(listModel);
-
-}
+    
+    public final void llenarLista (ArrayList<Jugador> lista, JList list){
+        DefaultListModel listModel = new DefaultListModel();
+        
+        for(int i=0; i<lista.size(); i++)
+            listModel.add(i, lista.get(i).getAlias());
+        
+        list.setModel(listModel);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
