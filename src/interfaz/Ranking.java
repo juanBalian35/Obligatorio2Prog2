@@ -14,10 +14,10 @@ import dominio.Sistema;
  * @author agustinintroini
  */
 public class Ranking extends javax.swing.JFrame {
-   
-    public Ranking() {
+   interfaz interfaz;
+    public Ranking(interfaz interfaz) {
         initComponents();
-        
+        this.interfaz=interfaz;
         
 
                   
@@ -113,7 +113,9 @@ public class Ranking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        interfaz.setEnabled(true);
         dispose();
+        
     }//GEN-LAST:event_btnSalirActionPerformed
 public static void agregar(String matriz[][]){
     jTabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -166,7 +168,7 @@ public static void agregar(String matriz[][]){
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ranking().setVisible(true);
+                new Ranking(null).setVisible(true);
             }
         });
     }

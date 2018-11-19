@@ -14,15 +14,14 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.sound.sampled.AudioSystem;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.JList;
 import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,6 +30,7 @@ import javax.swing.DefaultListSelectionModel;
 public class NuevaPartida extends javax.swing.JFrame {
     int azulElementoNoValido = -1,rojoElementoNoValido = -1;
     Color colorListaAzul, colorListaRoja;
+    interfaz interfaz;
     
     // Hace que el elemento en el indice que sea apropiado no sea clickeable.
     class SelectionModelInvalidar extends DefaultListSelectionModel {
@@ -74,8 +74,10 @@ public class NuevaPartida extends javax.swing.JFrame {
             return comp;
         }
     }
-    public NuevaPartida() {
+    public NuevaPartida(interfaz interfaz) {
         initComponents();
+        
+        this.interfaz = interfaz;
         
         colorListaAzul = jListAzul.getSelectionBackground();
         colorListaRoja = jListRojo.getSelectionBackground();
@@ -270,6 +272,7 @@ public class NuevaPartida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        interfaz.setEnabled(true);
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -278,23 +281,26 @@ public class NuevaPartida extends javax.swing.JFrame {
         int formaDeTerminar=jCB_FTerminar.getSelectedIndex()+1;
         Date fecha = GregorianCalendar.getInstance().getTime();
         Jugador jugadores[]=new Jugador[2];
+        if(jListRojo.isSelectionEmpty()||jListAzul.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar dos jugadores","Atención",JOptionPane.WARNING_MESSAGE);
+        }else{
         jugadores[0]=Sistema.getJugadores().get(jListRojo.getSelectedIndex());
         jugadores[1]=Sistema.getJugadores().get(jListAzul.getSelectedIndex());
         
-        partida=new Partida (jugadores,formaDeTerminar,fecha);
+        partida=new Partida (jugadores,formaDeTerminar,fecha, (int) spinnerMovimientos.getValue());
+        interfaz.setEnabled(true);
+        interfaz.setPartida(partida);
+       
+          for(int i = 0; i < interfaz.botones.length;++i)
+                for(int j = 0; j < interfaz.botones[0].length; ++j)
+                    interfaz.botones[i][j].setEnabled(true);
+        interfaz.actualizar(null);
+        this.dispose();
+        }
     }//GEN-LAST:event_btnIniciarPartidaActionPerformed
 
     private void jListRojoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListRojoValueChanged
-        /*ArrayList<Jugador> aux = new ArrayList();
-        aux=Sistema.getJugadores();
-        llenarLista(aux,jListRojo);
-        llenarLista(aux,jListAzul);
-
-        aux.remove(jListRojo.getSelectedIndex());
-        llenarLista(aux, jListAzul);
-       
-        */
-       
+ 
     }//GEN-LAST:event_jListRojoValueChanged
 
     private void jCB_FTerminarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCB_FTerminarItemStateChanged
@@ -340,7 +346,7 @@ public class NuevaPartida extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevaPartida().setVisible(true);
+                new NuevaPartida(null).setVisible(true);
             }
         });
     }

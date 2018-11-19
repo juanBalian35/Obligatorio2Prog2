@@ -16,12 +16,14 @@ import javax.swing.JSpinner.DefaultEditor;
  */
 public class agregarJugador extends javax.swing.JFrame {
 
+    interfaz interfaz;
+
     /**
      * Creates new form agregarJugador
      */
-    public agregarJugador() {
+    public agregarJugador(interfaz interfaz) {
         initComponents();
-        
+        this.interfaz = interfaz;
     }
 
     /**
@@ -177,6 +179,7 @@ public class agregarJugador extends javax.swing.JFrame {
           sistema.registrarJugador(jugador);   
           
           JOptionPane.showMessageDialog(this, "El jugador ha sido agregado exitosamente","Jugador agregado",JOptionPane.PLAIN_MESSAGE);
+          interfaz.setEnabled(true);
           this.dispose();
           }
           
@@ -198,6 +201,7 @@ public class agregarJugador extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreMouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        interfaz.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -230,7 +234,7 @@ public class agregarJugador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new agregarJugador().setVisible(true);
+                new agregarJugador(null).setVisible(true);
             }
         });
     }

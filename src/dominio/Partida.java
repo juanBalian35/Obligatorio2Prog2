@@ -23,16 +23,26 @@ public class Partida implements Comparable<Partida> {
     private ArrayList<Integer> numFichasValidas = new ArrayList<>();
     private Date fecha;
     private DateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private int cantMovimientos;
+
+    
 
     private Scanner scanner = new Scanner(System.in);
 
-    public Partida(Jugador[] jugadores_, int forma, Date d){
+    public Partida(Jugador[] jugadores_, int forma, Date d,int cantMov){
 	jugadores = jugadores_;
 	formaDeTerminar = forma;
 	fecha = d;
+        cantMovimientos=cantMov;
 	inicializarFichas();
     }
+    public int getCantMovimientos() {
+        return cantMovimientos;
+    }
 
+    public void setCantMovimientos(int cantMovimientos) {
+        this.cantMovimientos = cantMovimientos;
+    }
     public Date getFecha() {
         return fecha;
     }

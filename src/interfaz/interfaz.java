@@ -27,11 +27,15 @@ public class interfaz extends javax.swing.JFrame {
     private static final Color colorJugadorDosInvalido = Color.decode("#475785");
     private static final Color colorMovimientosValidos = Color.decode("#50C878");
    
-    private JButton[][] botones;
+    JButton[][] botones;
     private int jugadorActivo = 0;
     private Partida partida;
     private Ficha fichaSeleccionada = null;
 
+    public void setPartida(Partida partida){
+        this.partida = partida;
+    }
+    
     public interfaz() {
         initComponents();
         
@@ -41,9 +45,7 @@ public class interfaz extends javax.swing.JFrame {
         jugadores[1] = new Jugador("agustin", "ote2", 25);
         //
         
-        partida = new Partida(jugadores, 2, GregorianCalendar.getInstance().getTime());
-       
-        botones = new JButton[9][10];
+        botones = new JButton[8][9];
         
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 9; j++) {
@@ -51,14 +53,15 @@ public class interfaz extends javax.swing.JFrame {
                 
                 jButton.addActionListener(new ListenerBoton(i, j));
                 panelJuego.add(jButton);
-                
                 botones[i][j] = jButton;
                 botones[i][j].setForeground(Color.WHITE);
+                botones[i][j].setEnabled(false);
+                botones[i][j].setFont(new java.awt.Font("Heiti SC", 0, 22));
                 botones[i][j].setMargin(new Insets(-5, -5, -5, -5)); 
             }
         }
         
-        actualizar(null);
+        //actualizar(null);
     }
 
  public void reproducirSonido(String direccion){
@@ -72,7 +75,7 @@ public class interfaz extends javax.swing.JFrame {
    }
  }
  
-    private void actualizar(ArrayList<Integer> fichasValidas){
+    void actualizar(ArrayList<Integer> fichasValidas){
         for(int i = 0; i < 8; ++i){
             for(int j = 0; j < 9; ++j){
                 botones[i][j].setBackground(Color.GRAY);
@@ -128,14 +131,17 @@ public class interfaz extends javax.swing.JFrame {
         panelJuego = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPartida = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        nuevaPartida = new javax.swing.JMenuItem();
+        replicarPartida = new javax.swing.JMenuItem();
         jMenuJugador = new javax.swing.JMenu();
         agregarJugador = new javax.swing.JMenuItem();
         ranking = new javax.swing.JMenuItem();
         ayuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(0, 23, 650, 510));
+        setPreferredSize(new java.awt.Dimension(650, 510));
+        setResizable(false);
 
         jButton1.setText("Iniciar partida");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -151,36 +157,37 @@ public class interfaz extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(32, 32, 32)
+                .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(67, 67, 67))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(66, Short.MAX_VALUE)
-                .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         jMenuPartida.setText("Partida");
 
-        jMenuItem2.setText("Nueva partida");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        nuevaPartida.setText("Nueva partida");
+        nuevaPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                nuevaPartidaActionPerformed(evt);
             }
         });
-        jMenuPartida.add(jMenuItem2);
+        jMenuPartida.add(nuevaPartida);
 
-        jMenuItem1.setText("Replicar partida");
-        jMenuPartida.add(jMenuItem1);
+        replicarPartida.setText("Replicar partida");
+        jMenuPartida.add(replicarPartida);
 
         jMenuBar1.add(jMenuPartida);
 
@@ -217,7 +224,9 @@ public class interfaz extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,26 +234,34 @@ public class interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-       
+        
+        /*if(partida != null){
+            for(int i = 0; i < botones.length;++i)
+                for(int j = 0; j < botones[0].length; ++j)
+                    botones[i][j].setEnabled(true);
+            
+            actualizar(null);
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void agregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarJugadorActionPerformed
-        agregarJugador ventana= new agregarJugador();
+        agregarJugador ventana= new agregarJugador(this);
+        this.setEnabled(false);
         ventana.setVisible(true);
         
     }//GEN-LAST:event_agregarJugadorActionPerformed
 
     private void rankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingActionPerformed
-        
-        Ranking ventana= new Ranking();
+        Ranking ventana= new Ranking(this);
+        this.setEnabled(false);
         ventana.setVisible(true);    }//GEN-LAST:event_rankingActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        NuevaPartida nuevaPartida=new NuevaPartida();
+    private void nuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaPartidaActionPerformed
+        NuevaPartida nuevaPartida=new NuevaPartida(this);
         nuevaPartida.setVisible(true);
-
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        
+        this.setEnabled(false);
+    }//GEN-LAST:event_nuevaPartidaActionPerformed
 
     public static void main(String args[]) {
          Jugador jugador1 = new Jugador("juan", "ote", 25,12);
@@ -296,7 +313,7 @@ public class interfaz extends javax.swing.JFrame {
     }
     
     private void clickBoton(int fila, int columna) {
-        reproducirSonido("Bryant_Myers_diciendo_Bryant_Myers-jm140EP3B7w.wav");
+       //reproducirSonido("Bryant_Myers_diciendo_Bryant_Myers-jm140EP3B7w.wav");
         if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
             int mov = columna - fichaSeleccionada.getX();
             
@@ -344,12 +361,12 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JMenu ayuda;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jMenuJugador;
     private javax.swing.JMenu jMenuPartida;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem nuevaPartida;
     private javax.swing.JPanel panelJuego;
     private javax.swing.JMenuItem ranking;
+    private javax.swing.JMenuItem replicarPartida;
     // End of variables declaration//GEN-END:variables
 }
