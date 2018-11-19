@@ -313,7 +313,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
     private void clickBoton(int fila, int columna) {
-       //reproducirSonido("Bryant_Myers_diciendo_Bryant_Myers-jm140EP3B7w.wav");
+       reproducirSonido("src/tap-warm.aif");
         if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
             int mov = columna - fichaSeleccionada.getX();
             
