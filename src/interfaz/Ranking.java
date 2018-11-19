@@ -14,8 +14,8 @@ import dominio.Sistema;
  * @author agustinintroini
  */
 public class Ranking extends javax.swing.JFrame {
-   interfaz interfaz;
-    public Ranking(interfaz interfaz) {
+   Interfaz interfaz;
+    public Ranking(Interfaz interfaz) {
         initComponents();
         this.interfaz=interfaz;
         

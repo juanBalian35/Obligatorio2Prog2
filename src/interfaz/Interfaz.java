@@ -20,7 +20,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 
-public class interfaz extends javax.swing.JFrame {
+public class Interfaz extends javax.swing.JFrame {
     private static final Color colorJugadorUnoValido = Color.decode("#ff3300");
     private static final Color colorJugadorUnoInvalido = Color.decode("#a66959");
     private static final Color colorJugadorDosValido = Color.decode("#0033cc");
@@ -36,7 +36,7 @@ public class interfaz extends javax.swing.JFrame {
         this.partida = partida;
     }
     
-    public interfaz() {
+    public Interfaz() {
         initComponents();
         
         //temporal
@@ -245,7 +245,7 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void agregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarJugadorActionPerformed
-        agregarJugador ventana= new agregarJugador(this);
+        AgregarJugador ventana= new AgregarJugador(this);
         this.setEnabled(false);
         ventana.setVisible(true);
         
@@ -259,7 +259,6 @@ public class interfaz extends javax.swing.JFrame {
     private void nuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaPartidaActionPerformed
         NuevaPartida nuevaPartida=new NuevaPartida(this);
         nuevaPartida.setVisible(true);
-        
         this.setEnabled(false);
     }//GEN-LAST:event_nuevaPartidaActionPerformed
 
@@ -281,20 +280,21 @@ public class interfaz extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new interfaz().setVisible(true);
+                new Interfaz().setVisible(true);
             }
         });
     }

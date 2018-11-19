@@ -30,7 +30,7 @@ import javax.swing.JOptionPane;
 public class NuevaPartida extends javax.swing.JFrame {
     int azulElementoNoValido = -1,rojoElementoNoValido = -1;
     Color colorListaAzul, colorListaRoja;
-    interfaz interfaz;
+    Interfaz interfaz;
     
     // Hace que el elemento en el indice que sea apropiado no sea clickeable.
     class SelectionModelInvalidar extends DefaultListSelectionModel {
@@ -74,7 +74,7 @@ public class NuevaPartida extends javax.swing.JFrame {
             return comp;
         }
     }
-    public NuevaPartida(interfaz interfaz) {
+    public NuevaPartida(Interfaz interfaz) {
         initComponents();
         
         this.interfaz = interfaz;

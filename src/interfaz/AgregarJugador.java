@@ -14,14 +14,14 @@ import javax.swing.JSpinner.DefaultEditor;
  *
  * @author agustinintroini
  */
-public class agregarJugador extends javax.swing.JFrame {
+public class AgregarJugador extends javax.swing.JFrame {
 
-    interfaz interfaz;
+    Interfaz interfaz;
 
     /**
      * Creates new form agregarJugador
      */
-    public agregarJugador(interfaz interfaz) {
+    public AgregarJugador(Interfaz interfaz) {
         initComponents();
         this.interfaz = interfaz;
     }
@@ -221,20 +221,21 @@ public class agregarJugador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(agregarJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(agregarJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(agregarJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(agregarJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgregarJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new agregarJugador(null).setVisible(true);
+                new AgregarJugador(null).setVisible(true);
             }
         });
     }
