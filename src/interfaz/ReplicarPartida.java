@@ -13,15 +13,15 @@ import dominio.Sistema;
  *
  * @author agustinintroini
  */
-public class Ranking extends javax.swing.JFrame {
+public class ReplicarPartida extends javax.swing.JFrame {
    Interfaz interfaz;
-    public Ranking(Interfaz interfaz) {
+    public ReplicarPartida(Interfaz interfaz) {
         initComponents();
         this.interfaz=interfaz;
-        
-        if(Sistema.getJugadores().isEmpty()){
-            jSP.setVisible(false);
+        if(interfaz.getSistema().getPartidas().isEmpty()){
+            jScrollPane1.setVisible(false);
         }
+
                   
     }
 
@@ -34,10 +34,10 @@ public class Ranking extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jSP = new javax.swing.JScrollPane();
-        jTabla = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -51,6 +51,33 @@ public class Ranking extends javax.swing.JFrame {
         setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(null);
 
+        jTable1.setFont(new java.awt.Font("Heiti SC", 0, 12)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            Sistema.partidas(),
+            new String [] {
+                "Jugador rojo", "Jugador azul", "Dia", "Hora"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 50, 430, 90);
+
         btnSalir.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -63,50 +90,13 @@ public class Ranking extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Heiti TC", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Ranking de jugadores");
+        jLabel4.setText("Lista de partidas jugadas");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 20, 470, 30);
 
-        jTabla.setFont(new java.awt.Font("Heiti SC", 0, 12)); // NOI18N
-        jTabla.setModel(new javax.swing.table.DefaultTableModel(
-            Sistema.ranking(),
-            new String [] {
-                "N°", "Nombre", "Alias", "Edad", "N° de ganadas"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
-        jTabla.setShowGrid(false);
-        jTabla.getTableHeader().setReorderingAllowed(false);
-        jSP.setViewportView(jTabla);
-        jTabla.getColumnModel().getColumn(0).setPreferredWidth(10);
-        if (jTabla.getColumnModel().getColumnCount() > 0) {
-            jTabla.getColumnModel().getColumn(0).setResizable(false);
-            jTabla.getColumnModel().getColumn(2).setResizable(false);
-            jTabla.getColumnModel().getColumn(3).setResizable(false);
-            jTabla.getColumnModel().getColumn(4).setResizable(false);
-        }
-
-        getContentPane().add(jSP);
-        jSP.setBounds(20, 50, 430, 90);
-
         jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Aún no se han registrado jugadores");
+        jLabel1.setText("Aún no se ha jugado ninguna partida");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 90, 470, 30);
 
@@ -119,29 +109,8 @@ public class Ranking extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_btnSalirActionPerformed
-public static void agregar(String matriz[][]){
-    jTabla.setModel(new javax.swing.table.DefaultTableModel(
-            matriz,
-            new String [] {
-                "nro", "nombre", "alias", "edad", "cant ganadas"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-}
    
 
     /**
@@ -156,21 +125,23 @@ public static void agregar(String matriz[][]){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ranking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReplicarPartida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ranking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReplicarPartida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ranking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReplicarPartida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ranking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReplicarPartida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ranking(null).setVisible(true);
+                new ReplicarPartida(null).setVisible(true);
             }
         });
     }
@@ -179,7 +150,7 @@ public static void agregar(String matriz[][]){
     private javax.swing.JButton btnSalir;
     private static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jSP;
-    private static javax.swing.JTable jTabla;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

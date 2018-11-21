@@ -22,7 +22,8 @@ public class Partida implements Comparable<Partida> {
     private ArrayList<String> movimientos = new ArrayList<>();
     private ArrayList<Integer> numFichasValidas = new ArrayList<>();
     private Date fecha;
-    private DateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private DateFormat formatoDia = new SimpleDateFormat("dd/MM/yyyy");
+    private DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
     private int cantMovimientos;
 
     
@@ -45,6 +46,12 @@ public class Partida implements Comparable<Partida> {
     }
     public Date getFecha() {
         return fecha;
+    }
+    public String getDia(){
+        return formatoDia.format(fecha);
+    }
+     public String getHora(){
+        return formatoHora.format(fecha);
     }
     public void setFecha(Date fecha) {
         this.fecha = fecha;
@@ -135,12 +142,12 @@ public class Partida implements Comparable<Partida> {
         return -1;
     }
 
-    private boolean debeTerminar(boolean esJugadorUno, int cantMaxima){
+    public boolean debeTerminar(boolean esJugadorUno){
         switch(formaDeTerminar){
             case 1:
                 //Alcanzar cantidad maxima de movimientos
-                if(movimientos.size() == cantMaxima){
-                    System.out.println("Se ha alcanzado la cantidad máxima de movimientos ("+cantMaxima+"). JUEGO FINALIZADO");
+                if(movimientos.size() == cantMovimientos){
+                    System.out.println("Se ha alcanzado la cantidad máxima de movimientos ("+cantMovimientos+"). JUEGO FINALIZADO");
                     return true;
                 }
 
@@ -170,8 +177,8 @@ public class Partida implements Comparable<Partida> {
     }
     @Override
     public String toString() {
-        return Ficha.ROJO + jugadores[0].getAlias() + Ficha.RESET +
-                " vs " + Ficha.AZUL + jugadores[1].getAlias() + Ficha.RESET+
-                ", Fecha: " + formato.format(fecha);
+        return jugadores[0].getAlias() + 
+                " vs " + jugadores[1].getAlias() + 
+                ", Fecha: " + fecha;
     }
 }

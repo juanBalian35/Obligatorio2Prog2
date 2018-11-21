@@ -31,37 +31,35 @@ public class Interfaz extends javax.swing.JFrame {
     private int jugadorActivo = 0;
     private Partida partida;
     private Ficha fichaSeleccionada = null;
+    Sistema sistema;
 
     public void setPartida(Partida partida){
         this.partida = partida;
     }
     
+    public Sistema getSistema(){
+        return sistema;
+    }
+    
     public Interfaz() {
         initComponents();
         
-        //temporal
-        Jugador jugadores[] = new Jugador[2];
-        jugadores[0] = new Jugador("juan", "ote", 25);
-        jugadores[1] = new Jugador("agustin", "ote2", 25);
-        //
+        sistema = new Sistema();
         
         botones = new JButton[8][9];
         
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 9; j++) {
-                JButton jButton = new JButton();
-                
-                jButton.addActionListener(new ListenerBoton(i, j));
-                panelJuego.add(jButton);
-                botones[i][j] = jButton;
+                botones[i][j] = new JButton();
+
+                botones[i][j].addActionListener(new ListenerBoton(i, j));
+                panelJuego.add(botones[i][j]);
                 botones[i][j].setForeground(Color.WHITE);
                 botones[i][j].setEnabled(false);
                 botones[i][j].setFont(new java.awt.Font("Heiti SC", 0, 22));
-                botones[i][j].setMargin(new Insets(-5, -5, -5, -5)); 
+                botones[i][j].setMargin(new Insets(0,0, 0, 0)); 
             }
         }
-        
-        //actualizar(null);
     }
 
  public void reproducirSonido(String direccion){
@@ -96,12 +94,10 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
     private void limpiarCeldasVerdes(){
-        for(int i = 0; i < 8; ++i){
-            for(int j = 0; j < 9; ++j){
+        for(int i = 0; i < 8; ++i)
+            for(int j = 0; j < 9; ++j)
                 if(botones[i][j].getBackground() == colorMovimientosValidos)
                     botones[i][j].setBackground(Color.GRAY);
-            }
-        }
     }
     
     private Color pintarFichasDeJugador(int numJugador, ArrayList<Integer> fichasValidas, int numFicha){
@@ -187,6 +183,11 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuPartida.add(nuevaPartida);
 
         replicarPartida.setText("Replicar partida");
+        replicarPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                replicarPartidaActionPerformed(evt);
+            }
+        });
         jMenuPartida.add(replicarPartida);
 
         jMenuBar1.add(jMenuPartida);
@@ -262,11 +263,17 @@ public class Interfaz extends javax.swing.JFrame {
         this.setEnabled(false);
     }//GEN-LAST:event_nuevaPartidaActionPerformed
 
+    private void replicarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_replicarPartidaActionPerformed
+        ReplicarPartida repPartida=new ReplicarPartida(this);
+        repPartida.setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_replicarPartidaActionPerformed
+
     public static void main(String args[]) {
          Jugador jugador1 = new Jugador("juan", "ote", 25,12);
        Jugador jugador2 = new Jugador("agustin", "ote2", 25,12);
-      Sistema.registrarJugador(jugador1);
-        Sistema.registrarJugador(jugador2);
+      //Sistema.registrarJugador(jugador1);
+      // Sistema.registrarJugador(jugador2);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -325,6 +332,17 @@ public class Interfaz extends javax.swing.JFrame {
             
             String movimiento = fichaSeleccionada.getNumero() + "," + movi;
             ArrayList<Integer> fichasValidas = partida.hacerMovimiento(movimiento, jugadorActivo);
+            
+            if(partida.debeTerminar(jugadorActivo == 0)){
+                //TERMINO LA PARTIDA
+
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        botones[i][j].setEnabled(false);
+                    }
+                }
+                sistema.agregarPartida(partida);
+            }
             
             if(fichasValidas.isEmpty())
                 jugadorActivo = jugadorActivo == 0 ? 1 : 0;

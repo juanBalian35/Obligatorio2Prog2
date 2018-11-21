@@ -150,7 +150,7 @@ public class AgregarJugador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-     Sistema sistema = new Sistema();
+     Sistema sistema = interfaz.getSistema();
      String alias="", nombre="";
      int edad=(int)spinnerEdad.getValue();
         if(txtNombre.getText().isEmpty()){
