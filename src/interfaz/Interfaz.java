@@ -30,6 +30,7 @@ public class Interfaz extends javax.swing.JFrame {
     JButton[][] botones;
     private int jugadorActivo = 0;
     private Partida partida;
+    private Partida partidaReplicar;
     private Ficha fichaSeleccionada = null;
     Sistema sistema;
 
@@ -46,8 +47,16 @@ public class Interfaz extends javax.swing.JFrame {
         
         sistema = new Sistema();
         
-        botones = new JButton[8][9];
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(new Jugador("1","2",3));
+        jugadores.add(new Jugador("2","3",5));
+        sistema.setJugadores(jugadores);
         
+        botones = new JButton[8][9];
+        inicializarTablero();
+    }
+    
+    private void inicializarTablero(){
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 9; j++) {
                 botones[i][j] = new JButton();
@@ -113,6 +122,7 @@ public class Interfaz extends javax.swing.JFrame {
             return numJugador == 0 ?  colorJugadorUnoInvalido : colorJugadorDosInvalido;
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -125,6 +135,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         panelJuego = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPartida = new javax.swing.JMenu();
         nuevaPartida = new javax.swing.JMenuItem();
@@ -148,6 +159,13 @@ public class Interfaz extends javax.swing.JFrame {
 
         panelJuego.setLayout(new java.awt.GridLayout(8, 9));
 
+        jButton2.setText("Siguui");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,7 +174,9 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(67, 67, 67))
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,7 +185,9 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(182, 182, 182)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -269,6 +291,33 @@ public class Interfaz extends javax.swing.JFrame {
         this.setEnabled(false);
     }//GEN-LAST:event_replicarPartidaActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //SIGUIENTE PASO
+        ArrayList<String> movimientos = partidaReplicar.getMovimientos();
+        System.out.println("si: " + movimientos.size());
+        String mov = movimientos.remove(0);
+        System.out.println("da: " + movimientos.size());
+        partidaReplicar.setMovimientos(movimientos);
+        
+        
+        jugadorActivo = Integer.parseInt(""+mov.charAt(4));
+            
+        ArrayList<Integer> fichasValidas = partida.hacerMovimiento(mov, jugadorActivo);
+        actualizar(fichasValidas);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void replicar(Partida p){
+        partidaReplicar = p;
+        p.inicializarFichas();
+        
+        for(int i = 0; i < botones.length;++i)
+            for(int j = 0; j < botones[0].length; ++j)
+                botones[i][j].setEnabled(true);
+                        
+        actualizar(null);
+        jugadorActivo = 0;
+    }
+    
     public static void main(String args[]) {
          Jugador jugador1 = new Jugador("juan", "ote", 25,12);
        Jugador jugador2 = new Jugador("agustin", "ote2", 25,12);
@@ -318,7 +367,7 @@ public class Interfaz extends javax.swing.JFrame {
             clickBoton(x, y);
         }
     }
-    
+   
     private void clickBoton(int fila, int columna) {
        reproducirSonido("src/tap-warm.aif");
         if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
@@ -378,6 +427,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem agregarJugador;
     private javax.swing.JMenu ayuda;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuJugador;
     private javax.swing.JMenu jMenuPartida;

@@ -6,6 +6,7 @@
 package interfaz;
 
 
+import dominio.Partida;
 import dominio.Sistema;
 
 
@@ -39,6 +40,7 @@ public class ReplicarPartida extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnReplicar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Agregar jugador");
@@ -86,7 +88,7 @@ public class ReplicarPartida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSalir);
-        btnSalir.setBounds(190, 150, 80, 40);
+        btnSalir.setBounds(240, 150, 90, 40);
 
         jLabel4.setFont(new java.awt.Font("Heiti TC", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -100,6 +102,16 @@ public class ReplicarPartida extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 90, 470, 30);
 
+        btnReplicar.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
+        btnReplicar.setText("Replicar");
+        btnReplicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReplicarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReplicar);
+        btnReplicar.setBounds(130, 150, 90, 40);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -109,6 +121,14 @@ public class ReplicarPartida extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnReplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReplicarActionPerformed
+            Partida p = interfaz.getSistema().getPartidas().get(jTable1.getSelectedRow());
+            
+            interfaz.setEnabled(true);
+            interfaz.replicar(p);
+            this.dispose();
+    }//GEN-LAST:event_btnReplicarActionPerformed
 
 
    
@@ -147,6 +167,7 @@ public class ReplicarPartida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReplicar;
     private javax.swing.JButton btnSalir;
     private static javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;

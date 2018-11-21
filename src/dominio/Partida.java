@@ -118,7 +118,7 @@ public class Partida implements Comparable<Partida> {
         if(a[1].equals("I"))
             ficha.setX(ficha.getX() - 1);
         
-        movimientos.add(movimiento);
+        movimientos.add(movimiento + " " + numJugador);
         tablero.actualizar(jugadores);
         
         return tablero.fichasValidas(ficha, numJugador == 0);
