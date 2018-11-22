@@ -30,10 +30,10 @@ public class Interfaz extends javax.swing.JFrame {
     JButton[][] botones;
     private int jugadorActivo = 0;
     private Partida partida;
-    private Partida partidaReplicar;
+    private ArrayList<String> movimientosReplicar = null;
     private Ficha fichaSeleccionada = null;
-    Sistema sistema;
-
+    private Sistema sistema;
+    
     public void setPartida(Partida partida){
         this.partida = partida;
     }
@@ -71,16 +71,16 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
 
- public void reproducirSonido(String direccion){
-   try {
-    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(direccion));
-    Clip clip = AudioSystem.getClip( );
-    clip.open(audioInputStream);
-    clip.start( );
-   }catch(Exception ex){
-     System.out.println("Error al reproducir archivo");
-   }
- }
+    public void reproducirSonido(String direccion){
+        try {
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File(direccion)));
+            clip.start();
+        }
+        catch(Exception ex){
+            System.out.println("Error al reproducir archivo");
+        }
+    }
  
     void actualizar(ArrayList<Integer> fichasValidas){
         for(int i = 0; i < 8; ++i){
@@ -293,29 +293,39 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //SIGUIENTE PASO
-        ArrayList<String> movimientos = partidaReplicar.getMovimientos();
-        System.out.println("si: " + movimientos.size());
-        String mov = movimientos.remove(0);
-        System.out.println("da: " + movimientos.size());
-        partidaReplicar.setMovimientos(movimientos);
-        
+        String mov = movimientosReplicar.remove(0);
         
         jugadorActivo = Integer.parseInt(""+mov.charAt(4));
             
         ArrayList<Integer> fichasValidas = partida.hacerMovimiento(mov, jugadorActivo);
-        actualizar(fichasValidas);
+        
+        // Termino la partida
+        if(movimientosReplicar.isEmpty()){
+            actualizar(null);
+            jButton2.setEnabled(false);
+        }
+        else
+            actualizar(fichasValidas);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void replicar(Partida p){
-        partidaReplicar = p;
+        movimientosReplicar = (ArrayList<String>)p.getMovimientos().clone();
         p.inicializarFichas();
+        
+        jButton2.setEnabled(true);
+        
+        try {
+            partida = (Partida) p.clone();
+        } catch (CloneNotSupportedException e) {
+            return;
+        }
         
         for(int i = 0; i < botones.length;++i)
             for(int j = 0; j < botones[0].length; ++j)
                 botones[i][j].setEnabled(true);
                         
-        actualizar(null);
         jugadorActivo = 0;
+        actualizar(null);
     }
     
     public static void main(String args[]) {
@@ -364,7 +374,9 @@ public class Interfaz extends javax.swing.JFrame {
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            clickBoton(x, y);
+            // Si se esta replicando una partida no queremos que el clcik
+            if(movimientosReplicar == null || movimientosReplicar.isEmpty())
+                clickBoton(x, y);
         }
     }
    

@@ -284,18 +284,18 @@ public class NuevaPartida extends javax.swing.JFrame {
         if(jListRojo.isSelectionEmpty()||jListAzul.isSelectionEmpty()){
             JOptionPane.showMessageDialog(this, "Debe seleccionar dos jugadores","Atención",JOptionPane.WARNING_MESSAGE);
         }else{
-        jugadores[0]=Sistema.getJugadores().get(jListRojo.getSelectedIndex());
-        jugadores[1]=Sistema.getJugadores().get(jListAzul.getSelectedIndex());
-        
-        partida=new Partida (jugadores,formaDeTerminar,fecha, (int) spinnerMovimientos.getValue());
-        interfaz.setEnabled(true);
-        interfaz.setPartida(partida);
-       
-          for(int i = 0; i < interfaz.botones.length;++i)
-                for(int j = 0; j < interfaz.botones[0].length; ++j)
-                    interfaz.botones[i][j].setEnabled(true);
-        interfaz.actualizar(null);
-        this.dispose();
+            jugadores[0]=Sistema.getJugadores().get(jListRojo.getSelectedIndex());
+            jugadores[1]=Sistema.getJugadores().get(jListAzul.getSelectedIndex());
+
+            partida=new Partida (jugadores,formaDeTerminar,fecha, (int) spinnerMovimientos.getValue());
+            interfaz.setEnabled(true);
+            interfaz.setPartida(partida);
+
+              for(int i = 0; i < interfaz.botones.length;++i)
+                    for(int j = 0; j < interfaz.botones[0].length; ++j)
+                        interfaz.botones[i][j].setEnabled(true);
+            interfaz.actualizar(null);
+            this.dispose();
         }
     }//GEN-LAST:event_btnIniciarPartidaActionPerformed
 

@@ -6,16 +6,20 @@
 package dominio;
 
 import java.awt.Color;
+import java.io.File;
 import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 /*
 * Creado por:
 *   Juan Balian - 211150
 *   Agustín Introini - 211064
 * */
 
-public class Partida implements Comparable<Partida> {
+public class Partida implements Comparable<Partida>, Cloneable  {
     private Tablero tablero = new Tablero();
     private Jugador[] jugadores;
     private int formaDeTerminar;
@@ -26,7 +30,6 @@ public class Partida implements Comparable<Partida> {
     private DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
     private int cantMovimientos;
 
-    
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -171,6 +174,12 @@ public class Partida implements Comparable<Partida> {
         return false;
     }
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    
     @Override
     public int compareTo(Partida partida){
         return partida.getFecha().compareTo(getFecha());

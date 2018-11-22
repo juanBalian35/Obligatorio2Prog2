@@ -5,11 +5,13 @@
         <group>
             <file>file:/E:/Projects/Obl2Prog2/src/dominio/Sistema.java</file>
             <file>file:/E:/Projects/Obl2Prog2/src/dominio/Ficha.java</file>
+            <file>file:/E:/Projects/Obl2Prog2/src/interfaz/Ranking.java</file>
             <file>file:/E:/Projects/Obl2Prog2/src/dominio/Partida.java</file>
-            <file>file:/E:/Projects/Obl2Prog2/src/interfaz/agregarJugador.java</file>
-            <file>file:/E:/Projects/Obl2Prog2/src/interfaz/interfaz.java</file>
+            <file>file:/E:/Projects/Obl2Prog2/src/interfaz/Interfaz.java</file>
             <file>file:/E:/Projects/Obl2Prog2/src/dominio/Prueba.java</file>
+            <file>file:/E:/Projects/Obl2Prog2/src/interfaz/AgregarJugador.java</file>
             <file>file:/E:/Projects/Obl2Prog2/src/dominio/Tablero.java</file>
+            <file>file:/E:/Projects/Obl2Prog2/src/interfaz/NuevaPartida.java</file>
             <file>file:/E:/Projects/Obl2Prog2/src/dominio/Jugador.java</file>
         </group>
     </open-files>
