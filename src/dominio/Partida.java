@@ -19,7 +19,7 @@ import javax.sound.sampled.Clip;
 *   Agustín Introini - 211064
 * */
 
-public class Partida implements Comparable<Partida>, Cloneable  {
+public class Partida implements Comparable<Partida> {
     private Tablero tablero = new Tablero();
     private Jugador[] jugadores;
     private int formaDeTerminar;
@@ -42,6 +42,9 @@ public class Partida implements Comparable<Partida>, Cloneable  {
     }
     public int getCantMovimientos() {
         return cantMovimientos;
+    }
+    public int getFormaDeTerminar(){
+        return formaDeTerminar;
     }
 
     public void setCantMovimientos(int cantMovimientos) {
@@ -174,12 +177,6 @@ public class Partida implements Comparable<Partida>, Cloneable  {
         return false;
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-
-    
     @Override
     public int compareTo(Partida partida){
         return partida.getFecha().compareTo(getFecha());

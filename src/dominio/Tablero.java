@@ -74,6 +74,10 @@ public class Tablero {
         if(!fichasABorrar.contains(ficha.getNumero()))
             fichasABorrar.add(ficha.getNumero());
         
+        for(Integer i : fichasABorrar){
+            System.out.println("sacaa " + i);
+        }
+        
         movValidos.removeAll(fichasABorrar);
 
         return movValidos;

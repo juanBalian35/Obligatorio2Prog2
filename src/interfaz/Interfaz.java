@@ -4,19 +4,15 @@ package interfaz;
 import dominio.Ficha;
 import dominio.Jugador;
 import dominio.Partida;
-import dominio.Tablero;
 import dominio.Sistema;
+import dominio.Tablero;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.GregorianCalendar;
 import javax.swing.*;
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 
@@ -27,12 +23,12 @@ public class Interfaz extends javax.swing.JFrame {
     private static final Color colorJugadorDosInvalido = Color.decode("#475785");
     private static final Color colorMovimientosValidos = Color.decode("#50C878");
    
-    JButton[][] botones;
+    JButton[][] botones = new JButton[8][9];
     private int jugadorActivo = 0;
     private Partida partida;
     private ArrayList<String> movimientosReplicar = null;
     private Ficha fichaSeleccionada = null;
-    private Sistema sistema;
+    private Sistema sistema = new Sistema();
     
     public void setPartida(Partida partida){
         this.partida = partida;
@@ -45,14 +41,11 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         
-        sistema = new Sistema();
-        
         ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(new Jugador("1","2",3));
         jugadores.add(new Jugador("2","3",5));
         sistema.setJugadores(jugadores);
         
-        botones = new JButton[8][9];
         inicializarTablero();
     }
     
@@ -83,6 +76,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
  
     void actualizar(ArrayList<Integer> fichasValidas){
+        
         for(int i = 0; i < 8; ++i){
             for(int j = 0; j < 9; ++j){
                 botones[i][j].setBackground(Color.GRAY);
@@ -100,6 +94,13 @@ public class Interfaz extends javax.swing.JFrame {
                 boton.setText(ficha.getNumero() + "");
             }
         }
+        
+       Color color = jugadorActivo == 0 ? colorJugadorUnoValido : colorJugadorDosValido;
+       Color co = jugadorActivo == 0 ? colorJugadorUnoInvalido : colorJugadorDosInvalido;
+       
+       for(int i = 0, fila = jugadorActivo == 0 ? 0 : Tablero.LARGO - 1; i < botones[fila].length; ++i)
+           if(botones[fila][i].getBackground() == color)
+                botones[fila][i].setBackground(co);
     }
     
     private void limpiarCeldasVerdes(){
@@ -115,13 +116,11 @@ public class Interfaz extends javax.swing.JFrame {
                 return numJugador == 0 ? colorJugadorUnoValido : colorJugadorDosValido;
             else if (fichasValidas.contains(numFicha))
                 return numJugador == 0 ? colorJugadorUnoValido : colorJugadorDosValido;
-            else
-                return numJugador == 0 ?  colorJugadorUnoInvalido : colorJugadorDosInvalido;
-        }
-        else
             return numJugador == 0 ?  colorJugadorUnoInvalido : colorJugadorDosInvalido;
+        }
+        
+        return numJugador == 0 ?  colorJugadorUnoInvalido : colorJugadorDosInvalido;
     }
-
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -258,20 +257,12 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        /*if(partida != null){
-            for(int i = 0; i < botones.length;++i)
-                for(int j = 0; j < botones[0].length; ++j)
-                    botones[i][j].setEnabled(true);
-            
-            actualizar(null);
-        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void agregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarJugadorActionPerformed
         AgregarJugador ventana= new AgregarJugador(this);
         this.setEnabled(false);
         ventana.setVisible(true);
-        
     }//GEN-LAST:event_agregarJugadorActionPerformed
 
     private void rankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingActionPerformed
@@ -301,8 +292,9 @@ public class Interfaz extends javax.swing.JFrame {
         
         // Termino la partida
         if(movimientosReplicar.isEmpty()){
-            actualizar(null);
+            actualizar(new ArrayList<>());
             jButton2.setEnabled(false);
+            movimientosReplicar = null;
         }
         else
             actualizar(fichasValidas);
@@ -310,29 +302,17 @@ public class Interfaz extends javax.swing.JFrame {
 
     public void replicar(Partida p){
         movimientosReplicar = (ArrayList<String>)p.getMovimientos().clone();
-        p.inicializarFichas();
+        
+        partida = new Partida(p.getJugadores(), p.getFormaDeTerminar(), p.getFecha(), p.getCantMovimientos());
         
         jButton2.setEnabled(true);
+        enabledBotones(true);
         
-        try {
-            partida = (Partida) p.clone();
-        } catch (CloneNotSupportedException e) {
-            return;
-        }
-        
-        for(int i = 0; i < botones.length;++i)
-            for(int j = 0; j < botones[0].length; ++j)
-                botones[i][j].setEnabled(true);
-                        
         jugadorActivo = 0;
         actualizar(null);
     }
     
     public static void main(String args[]) {
-         Jugador jugador1 = new Jugador("juan", "ote", 25,12);
-       Jugador jugador2 = new Jugador("agustin", "ote2", 25,12);
-      //Sistema.registrarJugador(jugador1);
-      // Sistema.registrarJugador(jugador2);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -375,11 +355,19 @@ public class Interfaz extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Si se esta replicando una partida no queremos que el clcik
-            if(movimientosReplicar == null || movimientosReplicar.isEmpty())
+            System.out.println(movimientosReplicar == null);
+            
+            if(movimientosReplicar == null)
                 clickBoton(x, y);
         }
     }
    
+    private void enabledBotones(boolean estado){
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 9; j++)
+                botones[i][j].setEnabled(estado);
+    }
+    
     private void clickBoton(int fila, int columna) {
        reproducirSonido("src/tap-warm.aif");
         if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
@@ -396,12 +384,8 @@ public class Interfaz extends javax.swing.JFrame {
             
             if(partida.debeTerminar(jugadorActivo == 0)){
                 //TERMINO LA PARTIDA
-
-                for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 9; j++) {
-                        botones[i][j].setEnabled(false);
-                    }
-                }
+                enabledBotones(false);
+                
                 sistema.agregarPartida(partida);
             }
             
