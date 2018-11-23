@@ -290,11 +290,15 @@ public class NuevaPartida extends javax.swing.JFrame {
             partida=new Partida (jugadores,formaDeTerminar,fecha, (int) spinnerMovimientos.getValue());
             interfaz.setEnabled(true);
             interfaz.setPartida(partida);
+            interfaz.getLblMovRest().setText(spinnerMovimientos.getValue().toString());
 
               for(int i = 0; i < interfaz.botones.length;++i)
                     for(int j = 0; j < interfaz.botones[0].length; ++j)
                         interfaz.botones[i][j].setEnabled(true);
             interfaz.actualizar(null);
+            if(formaDeTerminar==1){
+               
+            }
             this.dispose();
         }
     }//GEN-LAST:event_btnIniciarPartidaActionPerformed
