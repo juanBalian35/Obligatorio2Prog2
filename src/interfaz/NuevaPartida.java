@@ -277,28 +277,20 @@ public class NuevaPartida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnIniciarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarPartidaActionPerformed
-        Partida partida;
-        int formaDeTerminar=jCB_FTerminar.getSelectedIndex()+1;
+        int formaDeTerminar = jCB_FTerminar.getSelectedIndex()+1;
         Date fecha = GregorianCalendar.getInstance().getTime();
-        Jugador jugadores[]=new Jugador[2];
+        Jugador jugadores[] = new Jugador[2];
+        
         if(jListRojo.isSelectionEmpty()||jListAzul.isSelectionEmpty()){
             JOptionPane.showMessageDialog(this, "Debe seleccionar dos jugadores","Atención",JOptionPane.WARNING_MESSAGE);
         }else{
-            jugadores[0]=Sistema.getJugadores().get(jListRojo.getSelectedIndex());
-            jugadores[1]=Sistema.getJugadores().get(jListAzul.getSelectedIndex());
+            jugadores[0] = Sistema.getJugadores().get(jListRojo.getSelectedIndex());
+            jugadores[1] = Sistema.getJugadores().get(jListAzul.getSelectedIndex());
 
-            partida=new Partida (jugadores,formaDeTerminar,fecha, (int) spinnerMovimientos.getValue());
+            Partida p = new Partida (jugadores,formaDeTerminar,fecha, (int) spinnerMovimientos.getValue());
+            interfaz.jugarPartida(p);
             interfaz.setEnabled(true);
-            interfaz.setPartida(partida);
-            interfaz.getLblMovRest().setText(spinnerMovimientos.getValue().toString());
-
-              for(int i = 0; i < interfaz.botones.length;++i)
-                    for(int j = 0; j < interfaz.botones[0].length; ++j)
-                        interfaz.botones[i][j].setEnabled(true);
-            interfaz.actualizar(null);
-            if(formaDeTerminar==1){
-               
-            }
+            
             this.dispose();
         }
     }//GEN-LAST:event_btnIniciarPartidaActionPerformed

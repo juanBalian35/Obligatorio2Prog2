@@ -28,7 +28,7 @@ public class Interfaz extends javax.swing.JFrame {
     private Partida partida;
     private ArrayList<String> movimientosReplicar = null;
     private Ficha fichaSeleccionada = null;
-    private Sistema sistema = new Sistema();
+    private final Sistema sistema = new Sistema();
     
     public void setPartida(Partida partida){
         this.partida = partida;
@@ -76,6 +76,8 @@ public class Interfaz extends javax.swing.JFrame {
     }
  
     void actualizar(ArrayList<Integer> fichasValidas){
+        if(partida.getFormaDeTerminar() == 1)
+            lblMovRest.setText("" + (partida.getCantMovimientos() - partida.getMovimientos().size()));
         
         for(int i = 0; i < 8; ++i){
             for(int j = 0; j < 9; ++j){
@@ -118,7 +120,6 @@ public class Interfaz extends javax.swing.JFrame {
                 return numJugador == 0 ? colorJugadorUnoValido : colorJugadorDosValido;
             return numJugador == 0 ?  colorJugadorUnoInvalido : colorJugadorDosInvalido;
         }
-        
         return numJugador == 0 ?  colorJugadorUnoInvalido : colorJugadorDosInvalido;
     }
     
@@ -162,8 +163,6 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
         jLabel1.setText("Movimientos restantes:");
 
-        panelReplicarPartida.setLocation(new java.awt.Point(-32327, -32717));
-
         btnSiguienteMov.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
         btnSiguienteMov.setText("Mov.Siguiente");
         btnSiguienteMov.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +173,6 @@ public class Interfaz extends javax.swing.JFrame {
 
         btnRetomarPartida.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
         btnRetomarPartida.setText("Retomar partida");
-        btnRetomarPartida.setLocation(new java.awt.Point(-32327, -32717));
         btnRetomarPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetomarPartidaActionPerformed(evt);
@@ -258,7 +256,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 157, Short.MAX_VALUE)
+            .addGap(0, 171, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -272,7 +270,7 @@ public class Interfaz extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 122, Short.MAX_VALUE)
+            .addGap(0, 132, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(12, 12, 12)
@@ -418,7 +416,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAbandonarActionPerformed
 
     private void btnPasarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasarTurnoActionPerformed
-        // TODO add your handling code here:
+        jugadorActivo = jugadorActivo == 0 ? 1 : 0;
+        actualizar(null);
     }//GEN-LAST:event_btnPasarTurnoActionPerformed
 
     private void btnSiguienteMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteMovActionPerformed
@@ -436,15 +435,28 @@ public class Interfaz extends javax.swing.JFrame {
             movimientosReplicar = null;
         }
         else
-            actualizar(fichasValidas);
-                                           
+            actualizar(fichasValidas);                            
     }//GEN-LAST:event_btnSiguienteMovActionPerformed
 
     private void btnRetomarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetomarPartidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRetomarPartidaActionPerformed
 
+    public void jugarPartida(Partida p){
+        panelPartida.setVisible(true);
+        panelReplicarPartida.setVisible(false);
+        
+        enabledBotones(true);
+        partida = p;
+        
+        jugadorActivo = 0;
+        actualizar(null);
+    }
+    
     public void replicar(Partida p){
+        panelPartida.setVisible(false);
+        panelReplicarPartida.setVisible(true);
+        
         movimientosReplicar = (ArrayList<String>)p.getMovimientos().clone();
         
         partida = new Partida(p.getJugadores(), p.getFormaDeTerminar(), p.getFecha(), p.getCantMovimientos());
