@@ -135,7 +135,6 @@ public class Interfaz extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        panelJuego = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         panelReplicarPartida = new javax.swing.JPanel();
@@ -146,10 +145,16 @@ public class Interfaz extends javax.swing.JFrame {
         btnAbandonar = new javax.swing.JButton();
         btnPasarTurno = new javax.swing.JButton();
         lblMovRest = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        panelJuego = new javax.swing.JPanel();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPartida = new javax.swing.JMenu();
         nuevaPartida = new javax.swing.JMenuItem();
         replicarPartida = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        cbSonido = new javax.swing.JCheckBoxMenuItem();
+        guardarJugadores = new javax.swing.JMenuItem();
         jMenuJugador = new javax.swing.JMenu();
         agregarJugador = new javax.swing.JMenuItem();
         ranking = new javax.swing.JMenuItem();
@@ -157,13 +162,15 @@ public class Interfaz extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 23, 650, 510));
-        setPreferredSize(new java.awt.Dimension(650, 510));
         setResizable(false);
 
-        panelJuego.setLayout(new java.awt.GridLayout(8, 9));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
         jLabel1.setText("Movimientos restantes:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 417, -1, -1));
+
+        panelReplicarPartida.setLocation(new java.awt.Point(-32327, -32717));
 
         btnSiguienteMov.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
         btnSiguienteMov.setText("Mov.Siguiente");
@@ -175,6 +182,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         btnRetomarPartida.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
         btnRetomarPartida.setText("Retomar partida");
+        btnRetomarPartida.setLocation(new java.awt.Point(-32327, -32717));
         btnRetomarPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetomarPartidaActionPerformed(evt);
@@ -258,7 +266,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 171, Short.MAX_VALUE)
+            .addGap(0, 157, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -272,7 +280,7 @@ public class Interfaz extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 132, Short.MAX_VALUE)
+            .addGap(0, 122, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(12, 12, 12)
@@ -287,46 +295,41 @@ public class Interfaz extends javax.swing.JFrame {
 
         panelReplicarPartida.setVisible(false);
 
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 109, -1, -1));
+
         lblMovRest.setFont(new java.awt.Font("Heiti TC", 2, 18)); // NOI18N
         lblMovRest.setForeground(new java.awt.Color(0, 153, 0));
+        jPanel1.add(lblMovRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 417, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblMovRest)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(57, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        panelJuego.setLayout(new java.awt.GridLayout(8, 9));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(168, 168, 168)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblMovRest))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 29, 370, 370));
+        jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 40, 40));
 
         jMenuPartida.setText("Partida");
 
-        nuevaPartida.setText("Nueva partida");
+        nuevaPartida.setText("Nueva partida...");
         nuevaPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevaPartidaActionPerformed(evt);
@@ -334,7 +337,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jMenuPartida.add(nuevaPartida);
 
-        replicarPartida.setText("Replicar partida");
+        replicarPartida.setText("Replicar partida...");
         replicarPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 replicarPartidaActionPerformed(evt);
@@ -342,11 +345,22 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jMenuPartida.add(replicarPartida);
 
+        jMenu1.setText("Más opciones");
+
+        cbSonido.setSelected(true);
+        cbSonido.setText("Sonido");
+        jMenu1.add(cbSonido);
+
+        guardarJugadores.setText("Guardar jugadores...");
+        jMenu1.add(guardarJugadores);
+
+        jMenuPartida.add(jMenu1);
+
         jMenuBar1.add(jMenuPartida);
 
         jMenuJugador.setText("Jugador");
 
-        agregarJugador.setText("Agregar jugador");
+        agregarJugador.setText("Agregar jugador...");
         agregarJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarJugadorActionPerformed(evt);
@@ -354,7 +368,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jMenuJugador.add(agregarJugador);
 
-        ranking.setText("Ranking");
+        ranking.setText("Ranking...");
         ranking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rankingActionPerformed(evt);
@@ -373,12 +387,12 @@ public class Interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -587,12 +601,17 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnPasarTurno;
     private javax.swing.JButton btnRetomarPartida;
     private javax.swing.JButton btnSiguienteMov;
+    private javax.swing.JCheckBoxMenuItem cbSonido;
+    private javax.swing.JMenuItem guardarJugadores;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuJugador;
     private javax.swing.JMenu jMenuPartida;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JToggleButton jToggleButton1;
     private static javax.swing.JLabel lblMovRest;
     private javax.swing.JMenuItem nuevaPartida;
     private javax.swing.JPanel panelJuego;
