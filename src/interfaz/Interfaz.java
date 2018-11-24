@@ -164,11 +164,12 @@ public class Interfaz extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(0, 23, 650, 510));
         setResizable(false);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
         jLabel1.setText("Movimientos restantes:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 417, -1, -1));
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(32, 417, 200, 20);
 
         panelReplicarPartida.setLocation(new java.awt.Point(-32327, -32717));
 
@@ -295,11 +296,13 @@ public class Interfaz extends javax.swing.JFrame {
 
         panelReplicarPartida.setVisible(false);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 109, -1, -1));
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(437, 109, 157, 122);
 
         lblMovRest.setFont(new java.awt.Font("Heiti TC", 2, 18)); // NOI18N
         lblMovRest.setForeground(new java.awt.Color(0, 153, 0));
-        jPanel1.add(lblMovRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 417, -1, -1));
+        jPanel1.add(lblMovRest);
+        lblMovRest.setBounds(244, 417, 0, 0);
 
         panelJuego.setLayout(new java.awt.GridLayout(8, 9));
 
@@ -324,7 +327,8 @@ public class Interfaz extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 29, 370, 370));
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(32, 29, 370, 370);
 
         btnSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-medium_volume.png"))); // NOI18N
         btnSonido.addActionListener(new java.awt.event.ActionListener() {
@@ -332,7 +336,8 @@ public class Interfaz extends javax.swing.JFrame {
                 btnSonidoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSonido, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 40, 40));
+        jPanel1.add(btnSonido);
+        btnSonido.setBounds(560, 390, 40, 40);
 
         jMenuPartida.setText("Partida");
 
