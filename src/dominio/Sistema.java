@@ -4,14 +4,17 @@ package dominio;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
-import javax.swing.JLabel;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /*
  * Creado por:
@@ -31,12 +34,30 @@ public class Sistema {
             Object s = sss.readObject();
             partidas = (ArrayList<Partida>)s;
         }
-        catch(java.io.EOFException e){
-            System.out.println("goodbye");
+        catch(Exception e){
+            //TODO: whatefac hacer en las exepsssssssssssssssssss
+        }
+        JSONParser parser = new JSONParser();
+        JSONArray a = new JSONArray();
+        try{
+            a = (JSONArray)parser.parse(new FileReader("jugadores.json"));
         }
         catch(Exception e){
-            //TODO: whatefac hacer en las exepciones?
-            e.printStackTrace();
+            //TODO: whatefac hacer en las exepsssssssssssssssssss
+        }
+
+        for(Object o : a){
+            JSONObject jugador = (JSONObject) o;
+            
+            String nombre = (String)jugador.get("nombre");
+            String alias = (String)jugador.get("alias");
+            int pGanadas = (int)((Long)jugador.get("pGanadas")).longValue();
+            int edad = (int)((Long)jugador.get("edad")).longValue();
+            
+            Jugador j = new Jugador(nombre, alias, edad);
+            j.setEdad(edad);
+            
+            jugadores.add(j);
         }
     }
     
@@ -152,13 +173,41 @@ public static String[][] partidas(){
     
     private void guardarPartida(){
         System.out.println("bad b");
+        escribirArchivo("partidas.txt", partidas);
+    }
+    
+    public void guardarJugadores(){
+        JSONObject object = new JSONObject();
+        JSONArray array = new JSONArray();
+        for(Jugador jugador : jugadores){
+            JSONObject jugadoSr = new JSONObject();
+            
+            jugadoSr.put("nombre", jugador.getNombre());
+            jugadoSr.put("alias", jugador.getAlias());
+            jugadoSr.put("edad", jugador.getEdad());
+            jugadoSr.put("pGanadas", jugador.getpGanadas());
+            
+            array.add(jugadoSr);
+        }
+        //object.put("jugadores", array);
+        try (FileWriter file = new FileWriter("jugadores.json");) {
+            file.write(array.toJSONString());
+            System.out.println(array.toJSONString());
+	}
+        catch(Exception e){
+            //TODO: whatefac hacer en las exepciones?
+            System.out.println("ke");
+        }
+    }
+    
+    private void escribirArchivo(String ruta, Object objeto){
         try{
-            File yourFile = new File("partidas.txt");
-            yourFile.createNewFile(); // if file already exists will do nothing 
+            File yourFile = new File(ruta);
+            yourFile.createNewFile();
             FileOutputStream ff = new FileOutputStream(yourFile);
             BufferedOutputStream b = new BufferedOutputStream(ff);
             ObjectOutputStream ss = new ObjectOutputStream(b);
-            ss.writeObject(partidas);
+            ss.writeObject(objeto);
             ss.flush();
             ss.close();
         }

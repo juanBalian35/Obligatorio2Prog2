@@ -44,11 +44,6 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(new Jugador("1","2",3));
-        jugadores.add(new Jugador("2","3",5));
-        sistema.setJugadores(jugadores);
-        
         inicializarTablero();
     }
     
@@ -370,6 +365,11 @@ public class Interfaz extends javax.swing.JFrame {
         jMenu1.add(cbSonido);
 
         guardarJugadores.setText("Guardar jugadores...");
+        guardarJugadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarJugadoresActionPerformed(evt);
+            }
+        });
         jMenu1.add(guardarJugadores);
 
         jMenuPartida.add(jMenu1);
@@ -486,6 +486,10 @@ public class Interfaz extends javax.swing.JFrame {
     private void cbSonidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSonidoActionPerformed
         cambiarEstadoSonido();
     }//GEN-LAST:event_cbSonidoActionPerformed
+
+    private void guardarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarJugadoresActionPerformed
+        sistema.guardarJugadores();
+    }//GEN-LAST:event_guardarJugadoresActionPerformed
 
     private void cambiarEstadoSonido(){
         if(sonidoActivado)
