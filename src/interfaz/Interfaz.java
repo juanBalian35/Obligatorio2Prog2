@@ -337,7 +337,7 @@ public class Interfaz extends javax.swing.JFrame {
         panelTransparente.add(jLabel4);
         jLabel4.setBounds(140, 190, 210, 30);
 
-        fondo.setIcon(new javax.swing.ImageIcon("/Users/agustinintroini/Desktop/sisi.png")); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/sisi.png"))); // NOI18N
         panelTransparente.add(fondo);
         fondo.setBounds(0, 0, 370, 370);
 
