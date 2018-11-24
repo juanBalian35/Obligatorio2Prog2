@@ -104,10 +104,10 @@ public class Prueba {
                     System.out.println("El jugador ha sido registrado exitosamente.");
                     break;
                 case "2":
-                    if(Sistema.getJugadores().size()<2){
+                    /*if(.size() < 2){
                         System.out.println("\nDebe haber registrado al menos dos jugadores para iniciar una partida\n");
                         break;
-                    }
+                    }*/
 
                     String aliasJugador;
                     do {
@@ -138,7 +138,7 @@ public class Prueba {
                     //sistema.jugar(j1, j2, opcion,fecha);
                     break;
                 case "3":
-                    sistema.replicar();
+                    //sistema.replicar();
                     break;
                 case "4":
                     sistema.ranking();

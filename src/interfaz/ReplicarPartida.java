@@ -8,6 +8,7 @@ package interfaz;
 
 import dominio.Partida;
 import dominio.Sistema;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -18,12 +19,35 @@ public class ReplicarPartida extends javax.swing.JFrame {
    Interfaz interfaz;
     public ReplicarPartida(Interfaz interfaz) {
         initComponents();
-        this.interfaz=interfaz;
-        if(interfaz.getSistema().getPartidas().isEmpty()){
-            jScrollPane1.setVisible(false);
-        }
+        this.interfaz = interfaz;
+        
+        String[] nombreColumnas =  new String [] {
+                "Jugador rojo", "Jugador azul", "Dia", "Hora"
+        };
+        
+        DefaultTableModel model = new DefaultTableModel(interfaz.getSistema().partidas(), nombreColumnas) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
 
-                  
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+        jTable1.setModel(model);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        
+        for(int i = 0; i < jTable1.getColumnModel().getColumnCount(); ++i)
+            jTable1.getColumnModel().getColumn(i).setResizable(false);
+        
+        if(interfaz.getSistema().getPartidas().isEmpty())
+            jScrollPane1.setVisible(false);
     }
 
     /**
@@ -54,12 +78,7 @@ public class ReplicarPartida extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jTable1.setFont(new java.awt.Font("Heiti SC", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            Sistema.partidas(),
-            new String [] {
-                "Jugador rojo", "Jugador azul", "Dia", "Hora"
-            }
-        ) {
+        jTable1.setModel(new javax.swing.table.DefaultTableModel() {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
@@ -115,7 +134,6 @@ public class ReplicarPartida extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         interfaz.setEnabled(true);
         dispose();

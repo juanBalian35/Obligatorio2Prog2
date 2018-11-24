@@ -82,13 +82,13 @@ public class NuevaPartida extends javax.swing.JFrame {
         colorListaAzul = jListAzul.getSelectionBackground();
         colorListaRoja = jListRojo.getSelectionBackground();
         
-        if(Sistema.getJugadores().isEmpty()){
+        if(interfaz.getSistema().getJugadores().isEmpty()){
             jPanel1.setVisible(false);
             btnIniciarPartida.setEnabled(false);
         }
         
-        llenarLista(Sistema.getJugadores(),jListAzul);
-        llenarLista(Sistema.getJugadores(),jListRojo);
+        llenarLista(interfaz.getSistema().getJugadores(),jListAzul);
+        llenarLista(interfaz.getSistema().getJugadores(),jListRojo);
         
         ListSelectionListener listener = new ListSelectionListener() {
             @Override
@@ -284,8 +284,8 @@ public class NuevaPartida extends javax.swing.JFrame {
         if(jListRojo.isSelectionEmpty()||jListAzul.isSelectionEmpty()){
             JOptionPane.showMessageDialog(this, "Debe seleccionar dos jugadores","Atención",JOptionPane.WARNING_MESSAGE);
         }else{
-            jugadores[0] = Sistema.getJugadores().get(jListRojo.getSelectedIndex());
-            jugadores[1] = Sistema.getJugadores().get(jListAzul.getSelectedIndex());
+            jugadores[0] = interfaz.getSistema().getJugadores().get(jListRojo.getSelectedIndex());
+            jugadores[1] = interfaz.getSistema().getJugadores().get(jListAzul.getSelectedIndex());
 
             Partida p = new Partida (jugadores,formaDeTerminar,fecha, (int) spinnerMovimientos.getValue());
             interfaz.jugarPartida(p);

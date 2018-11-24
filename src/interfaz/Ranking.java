@@ -5,9 +5,7 @@
  */
 package interfaz;
 
-
-import dominio.Sistema;
-
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,12 +15,36 @@ public class Ranking extends javax.swing.JFrame {
    Interfaz interfaz;
     public Ranking(Interfaz interfaz) {
         initComponents();
-        this.interfaz=interfaz;
+        this.interfaz = interfaz;
+
+        String[] nombreColumnas = new String [] {
+            "N°", "Nombre", "Alias", "Edad", "N° de ganadas"
+        };
         
-        if(Sistema.getJugadores().isEmpty()){
+        DefaultTableModel modelo = new DefaultTableModel(interfaz.getSistema().ranking(), nombreColumnas){
+                Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+        jTabla.setModel(modelo);
+        
+        jTabla.getColumnModel().getColumn(0).setPreferredWidth(10);
+        for(int i = 0; i < jTabla.getColumnModel().getColumnCount(); ++i)
+            jTabla.getColumnModel().getColumn(i).setResizable(false);
+        
+        if(interfaz.getSistema().getJugadores().isEmpty()){
             jSP.setVisible(false);
         }
-                  
     }
 
     /**
@@ -69,37 +91,16 @@ public class Ranking extends javax.swing.JFrame {
 
         jTabla.setFont(new java.awt.Font("Heiti SC", 0, 12)); // NOI18N
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
-            Sistema.ranking(),
+            new Object [][] {
+
+            },
             new String [] {
-                "N°", "Nombre", "Alias", "Edad", "N° de ganadas"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
-        jTabla.setShowGrid(false);
         jTabla.getTableHeader().setReorderingAllowed(false);
         jSP.setViewportView(jTabla);
-        jTabla.getColumnModel().getColumn(0).setPreferredWidth(10);
-        if (jTabla.getColumnModel().getColumnCount() > 0) {
-            jTabla.getColumnModel().getColumn(0).setResizable(false);
-            jTabla.getColumnModel().getColumn(2).setResizable(false);
-            jTabla.getColumnModel().getColumn(3).setResizable(false);
-            jTabla.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         getContentPane().add(jSP);
         jSP.setBounds(20, 50, 430, 90);
@@ -119,7 +120,7 @@ public class Ranking extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_btnSalirActionPerformed
-public static void agregar(String matriz[][]){
+/*public static void agregar(String matriz[][]){
     jTabla.setModel(new javax.swing.table.DefaultTableModel(
             matriz,
             new String [] {
@@ -141,7 +142,7 @@ public static void agregar(String matriz[][]){
                 return canEdit [columnIndex];
             }
         });
-}
+}*/
    
 
     /**
