@@ -500,16 +500,19 @@ public class Interfaz extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         String ruta = null;
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Archivos JSON", "JSON"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Archivos json", "json"));
+                chooser.setAcceptAllFileFilterUsed(false);
+
         int op = chooser.showSaveDialog(this);
         if (op == JFileChooser.APPROVE_OPTION){
             ruta = chooser.getSelectedFile().toString();
+            if(!ruta.endsWith(".json"))
+                ruta += ".json";
+        
+            sistema.guardarJugadores(ruta);
         }
         
-        if(!ruta.endsWith(".json"))
-            ruta += ".json";
         
-        sistema.guardarJugadores(ruta);
     }//GEN-LAST:event_guardarJugadoresActionPerformed
 
     private void cambiarEstadoSonido(){
