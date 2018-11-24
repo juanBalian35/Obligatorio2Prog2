@@ -2,6 +2,14 @@
 package dominio;
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 import javax.swing.JLabel;
 
@@ -15,6 +23,23 @@ public class Sistema {
     private static ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
     private static ArrayList<Partida> partidas = new ArrayList<>();
     
+    public Sistema(){
+        try{
+            FileInputStream fff = new FileInputStream("partidas.txt");
+            BufferedInputStream bbb = new BufferedInputStream(fff);
+            ObjectInputStream sss = new ObjectInputStream(bbb);
+            Object s = sss.readObject();
+            partidas = (ArrayList<Partida>)s;
+        }
+        catch(java.io.EOFException e){
+            System.out.println("goodbye");
+        }
+        catch(Exception e){
+            //TODO: whatefac hacer en las exepciones?
+            e.printStackTrace();
+        }
+    }
+    
     public ArrayList<Partida> getPartidas() {
         return partidas;
     }
@@ -24,6 +49,7 @@ public class Sistema {
     
     public void agregarPartida(Partida partida){
         partidas.add(partida);
+        guardarPartida();
     }
 
     public static ArrayList<Jugador> getJugadores() {
@@ -122,6 +148,24 @@ public static String[][] partidas(){
                 return jugador;
 
         return null;
+    }
+    
+    private void guardarPartida(){
+        System.out.println("bad b");
+        try{
+            File yourFile = new File("partidas.txt");
+            yourFile.createNewFile(); // if file already exists will do nothing 
+            FileOutputStream ff = new FileOutputStream(yourFile);
+            BufferedOutputStream b = new BufferedOutputStream(ff);
+            ObjectOutputStream ss = new ObjectOutputStream(b);
+            ss.writeObject(partidas);
+            ss.flush();
+            ss.close();
+        }
+        catch(Exception e){
+            //TODO: whatefac hacer en las exepciones?
+            System.out.println("ke");
+        }
     }
 }
 

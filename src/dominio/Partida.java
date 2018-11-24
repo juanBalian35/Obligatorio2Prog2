@@ -5,33 +5,24 @@
  */
 package dominio;
 
-import java.awt.Color;
-import java.io.File;
+import java.io.Serializable;
 import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 /*
 * Creado por:
 *   Juan Balian - 211150
 *   Agustín Introini - 211064
 * */
 
-public class Partida implements Comparable<Partida> {
+public class Partida implements Comparable<Partida>, Serializable {
     private Tablero tablero = new Tablero();
     private Jugador[] jugadores;
     private int formaDeTerminar;
     private ArrayList<String> movimientos = new ArrayList<>();
     private ArrayList<Integer> numFichasValidas = new ArrayList<>();
     private Date fecha;
-    private DateFormat formatoDia = new SimpleDateFormat("dd/MM/yyyy");
-    private DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
     private int cantMovimientos;
-
-
-    private Scanner scanner = new Scanner(System.in);
 
     public Partida(Jugador[] jugadores_, int forma, Date d,int cantMov){
 	jugadores = jugadores_;
@@ -54,9 +45,11 @@ public class Partida implements Comparable<Partida> {
         return fecha;
     }
     public String getDia(){
+        DateFormat formatoDia = new SimpleDateFormat("dd/MM/yyyy");
         return formatoDia.format(fecha);
     }
      public String getHora(){
+        DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
         return formatoHora.format(fecha);
     }
     public void setFecha(Date fecha) {

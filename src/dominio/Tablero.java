@@ -1,6 +1,7 @@
 
 package dominio;
 
+import java.io.Serializable;
 import java.util.*;
 
 /*
@@ -9,7 +10,7 @@ import java.util.*;
  *   Agustín Introini - 211064
  * */
 
-public class Tablero {
+public class Tablero implements Serializable {
     public static final int ANCHO = 9;
     public static final int LARGO = 8;
 

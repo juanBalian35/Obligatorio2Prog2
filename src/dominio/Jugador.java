@@ -1,13 +1,22 @@
 
 package dominio;
 
+import java.io.Serializable;
+
 /*
  * Creado por:
  *   Juan Balian - 211150
  *   Agustín Introini - 211064
  * */
 
-public class Jugador implements Comparable<Jugador> {
+public class Jugador implements Comparable<Jugador>, Serializable {
+    public static final int NUM_FICHAS = 8;
+
+    private String alias;
+    private String nombre;
+    private int edad;
+    private int pGanadas;
+    private Ficha[] fichas = new Ficha[NUM_FICHAS];
 
     public Jugador(String alias, String nombre, int edad, int pGanadas) {
         this.alias = alias;
@@ -15,14 +24,7 @@ public class Jugador implements Comparable<Jugador> {
         this.edad = edad;
         this.pGanadas = pGanadas;
     }
-    public static final int NUM_FICHAS = 8;
 
-    private String alias;
-    private String nombre;
-    private int edad;
-    private int pGanadas;
-
-    private Ficha[] fichas = new Ficha[NUM_FICHAS];
 
     public Jugador(String nombre, String alias, int edad) {
         this.alias = alias;
