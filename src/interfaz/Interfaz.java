@@ -153,6 +153,11 @@ public class Interfaz extends javax.swing.JFrame {
         btnPasarTurno = new javax.swing.JButton();
         lblMovRest = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        panelTransparente = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lblAlias = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
         panelJuego = new javax.swing.JPanel();
         btnSonido = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -176,7 +181,7 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
         jLabel1.setText("Movimientos restantes:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(32, 417, 184, 24);
+        jLabel1.setBounds(32, 417, 200, 20);
 
         btnSiguienteMov.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
         btnSiguienteMov.setText("Mov.Siguiente");
@@ -301,38 +306,50 @@ public class Interfaz extends javax.swing.JFrame {
         panelReplicarPartida.setVisible(false);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(437, 109, 171, 132);
+        jPanel2.setBounds(437, 109, 157, 122);
 
         lblMovRest.setFont(new java.awt.Font("Heiti TC", 2, 18)); // NOI18N
         lblMovRest.setForeground(new java.awt.Color(0, 153, 0));
         jPanel1.add(lblMovRest);
         lblMovRest.setBounds(220, 420, 30, 20);
 
-        panelJuego.setLayout(new java.awt.GridLayout(8, 9));
+        jPanel3.setLayout(null);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        panelTransparente.setBackground(new Color(0,0,0,0));
+        panelTransparente.setLayout(null);
+
+        jLabel2.setFont(new java.awt.Font("Heiti SC", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("¡FELICITACIONES!");
+        panelTransparente.add(jLabel2);
+        jLabel2.setBounds(0, 150, 370, 30);
+
+        lblAlias.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
+        lblAlias.setForeground(new java.awt.Color(255, 0, 51));
+        lblAlias.setText("Jugador");
+        panelTransparente.add(lblAlias);
+        lblAlias.setBounds(30, 190, 130, 30);
+
+        jLabel4.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Ha ganado la partida");
+        panelTransparente.add(jLabel4);
+        jLabel4.setBounds(140, 190, 210, 30);
+
+        fondo.setIcon(new javax.swing.ImageIcon("/Users/agustinintroini/Desktop/sisi.png")); // NOI18N
+        panelTransparente.add(fondo);
+        fondo.setBounds(0, 0, 370, 370);
+
+        jPanel3.add(panelTransparente);
+        panelTransparente.setBounds(0, 0, 370, 370);
+
+        panelJuego.setLayout(new java.awt.GridLayout(8, 9));
+        jPanel3.add(panelJuego);
+        panelJuego.setBounds(0, 0, 370, 370);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(32, 29, 370, 370);
+        jPanel3.setBounds(32, 29, 370, 740);
 
         btnSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-medium_volume.png"))); // NOI18N
         btnSonido.addActionListener(new java.awt.event.ActionListener() {
@@ -673,8 +690,11 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnSiguienteMov;
     private javax.swing.JButton btnSonido;
     private javax.swing.JCheckBoxMenuItem cbSonido;
+    private javax.swing.JLabel fondo;
     private javax.swing.JMenuItem guardarJugadores;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuJugador;
@@ -682,11 +702,13 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblAlias;
     private static javax.swing.JLabel lblMovRest;
     private javax.swing.JMenuItem nuevaPartida;
     private javax.swing.JPanel panelJuego;
     private javax.swing.JPanel panelPartida;
     private javax.swing.JPanel panelReplicarPartida;
+    private javax.swing.JPanel panelTransparente;
     private javax.swing.JMenuItem ranking;
     private javax.swing.JMenuItem replicarPartida;
     // End of variables declaration//GEN-END:variables
