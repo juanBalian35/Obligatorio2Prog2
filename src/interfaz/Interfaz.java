@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.*;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
@@ -439,7 +441,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSiguienteMovActionPerformed
 
     private void btnRetomarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetomarPartidaActionPerformed
-        // TODO add your handling code here:
+        movimientosReplicar = null;
+        btnSiguienteMov.setEnabled(false);
     }//GEN-LAST:event_btnRetomarPartidaActionPerformed
 
     public void jugarPartida(Partida p){
@@ -459,7 +462,8 @@ public class Interfaz extends javax.swing.JFrame {
         
         movimientosReplicar = (ArrayList<String>)p.getMovimientos().clone();
         
-        partida = new Partida(p.getJugadores(), p.getFormaDeTerminar(), p.getFecha(), p.getCantMovimientos());
+        Date fecha = GregorianCalendar.getInstance().getTime();
+        partida = new Partida(p.getJugadores(), p.getFormaDeTerminar(), fecha, p.getCantMovimientos());
         
         btnSiguienteMov.setEnabled(true);
         enabledBotones(true);
