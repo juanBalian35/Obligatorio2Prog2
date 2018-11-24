@@ -147,7 +147,7 @@ public class Interfaz extends javax.swing.JFrame {
         lblMovRest = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelJuego = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        btnSonido = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuPartida = new javax.swing.JMenu();
         nuevaPartida = new javax.swing.JMenuItem();
@@ -325,7 +325,14 @@ public class Interfaz extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 29, 370, 370));
-        jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 40, 40));
+
+        btnSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-medium_volume.png"))); // NOI18N
+        btnSonido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSonidoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSonido, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 40, 40));
 
         jMenuPartida.setText("Partida");
 
@@ -458,6 +465,12 @@ public class Interfaz extends javax.swing.JFrame {
         movimientosReplicar = null;
         btnSiguienteMov.setEnabled(false);
     }//GEN-LAST:event_btnRetomarPartidaActionPerformed
+
+    private void btnSonidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSonidoActionPerformed
+       if(btnSonido.getIcon().equals(new ImageIcon(getClass().getResource("/interfaz/icons8-medium_volume.png")))){
+            btnSonido.setIcon(new ImageIcon(getClass().getResource("/interfaz/icons8-mute.png"))); 
+        }else btnSonido.setIcon(new ImageIcon(getClass().getResource("/interfaz/icons8-medium_volume.png")));
+;    }//GEN-LAST:event_btnSonidoActionPerformed
 
     public void jugarPartida(Partida p){
         panelPartida.setVisible(true);
@@ -601,6 +614,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnPasarTurno;
     private javax.swing.JButton btnRetomarPartida;
     private javax.swing.JButton btnSiguienteMov;
+    private javax.swing.JButton btnSonido;
     private javax.swing.JCheckBoxMenuItem cbSonido;
     private javax.swing.JMenuItem guardarJugadores;
     private javax.swing.JLabel jLabel1;
@@ -611,7 +625,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JToggleButton jToggleButton1;
     private static javax.swing.JLabel lblMovRest;
     private javax.swing.JMenuItem nuevaPartida;
     private javax.swing.JPanel panelJuego;

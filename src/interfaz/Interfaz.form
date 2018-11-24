@@ -381,10 +381,18 @@
             </Container>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+        <Component class="javax.swing.JButton" name="btnSonido">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/interfaz/icons8-medium_volume.png"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSonidoActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="570" y="400" width="40" height="40"/>
+              <AbsoluteConstraints x="560" y="390" width="40" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
