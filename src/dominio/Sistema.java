@@ -27,62 +27,8 @@ public class Sistema {
     private ArrayList<Partida> partidas = new ArrayList<>();
     
     public Sistema(){
-        try{
-            FileInputStream fff = new FileInputStream("partidas.txt");
-            BufferedInputStream bbb = new BufferedInputStream(fff);
-            ObjectInputStream sss = new ObjectInputStream(bbb);
-            Object s = sss.readObject();
-            partidas = (ArrayList<Partida>)s;
-        }
-        catch(Exception e){
-            //TODO: whatefac hacer en las exepsssssssssssssssssss
-        }
-        JSONParser parser = new JSONParser();
-        JSONArray a = new JSONArray();
-        try{
-            a = (JSONArray)parser.parse(new FileReader("jugadores.json"));
-        }
-        catch(Exception e){
-            //TODO: whatefac hacer en las exepsssssssssssssssssss
-        }
-
-        for(Object o : a){
-            JSONObject jugador = (JSONObject) o;
-            
-            String nombre = (String)jugador.get("nombre");
-            String alias = (String)jugador.get("alias");
-            int pGanadas = (int)((Long)jugador.get("pGanadas")).longValue();
-            int edad = (int)((Long)jugador.get("edad")).longValue();
-            
-            Jugador j = new Jugador(nombre, alias, edad);
-            j.setpGanadas(pGanadas);
-            
-            jugadores.add(j);
-        }
-    }
-    
-    public ArrayList<Partida> getPartidas() {
-        return partidas;
-    }
-    public void setPartidas(ArrayList<Partida> partidas) {
-        this.partidas = partidas;
-    }
-    
-    public void agregarPartida(Partida partida){
-        partidas.add(partida);
-        guardarPartida();
-    }
-
-    public ArrayList<Jugador> getJugadores() {
-        return jugadores;
-    }
-
-    public void setJugadores(ArrayList<Jugador> jugadores) {
-        this.jugadores = jugadores;
-    }
-
-    public void registrarJugador(Jugador jugador){
-        jugadores.add(jugador);
+        partidas = (ArrayList<Partida>)leerArchivo("partidas.txt");
+        jugadores = (ArrayList<Jugador>)leerArchivo("jugadores.txt");
     }
     
     public String[][] partidas(){
@@ -134,16 +80,15 @@ public class Sistema {
         for(Jugador jugador : jugadores)
             if(jugador.getAlias().equals(alias))
                 return jugador;
-
         return null;
     }
     
-    private void guardarPartida(){
-        System.out.println("bad b");
+    public void guardar(){
         escribirArchivo("partidas.txt", partidas);
+        escribirArchivo("jugadores.txt", jugadores);
     }
     
-    public void guardarJugadores(){
+    public void guardarJugadores(String ruta){
         JSONObject object = new JSONObject();
         JSONArray array = new JSONArray();
         for(Jugador jugador : jugadores){
@@ -157,7 +102,7 @@ public class Sistema {
             array.add(jugadoSr);
         }
         //object.put("jugadores", array);
-        try (FileWriter file = new FileWriter("jugadores.json");) {
+        try (FileWriter file = new FileWriter(ruta)) {
             file.write(array.toJSONString());
             System.out.println(array.toJSONString());
 	}
@@ -182,6 +127,42 @@ public class Sistema {
             //TODO: whatefac hacer en las exepciones?
             System.out.println("ke");
         }
+    }
+    
+    private Object leerArchivo(String ruta){
+        try{
+            FileInputStream fff = new FileInputStream(ruta);
+            BufferedInputStream bbb = new BufferedInputStream(fff);
+            ObjectInputStream sss = new ObjectInputStream(bbb);
+            return sss.readObject();
+        }
+        catch(Exception e){
+            //TODO: whatefac hacer en las exepsssssssssssssssssss
+        }
+        return null;
+    }
+    
+    public ArrayList<Partida> getPartidas() {
+        return partidas;
+    }
+    public void setPartidas(ArrayList<Partida> partidas) {
+        this.partidas = partidas;
+    }
+    
+    public void agregarPartida(Partida partida){
+        partidas.add(partida);
+    }
+
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(ArrayList<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+    public void registrarJugador(Jugador jugador){
+        jugadores.add(jugador);
     }
 }
 

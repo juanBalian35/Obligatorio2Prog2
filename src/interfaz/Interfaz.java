@@ -2,7 +2,6 @@
 package interfaz;
 
 import dominio.Ficha;
-import dominio.Jugador;
 import dominio.Partida;
 import dominio.Sistema;
 import dominio.Tablero;
@@ -10,6 +9,8 @@ import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.GregorianCalendar;
 import javax.swing.*;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Interfaz extends javax.swing.JFrame {
     private static final Color colorJugadorUnoValido = Color.decode("#ff3300");
@@ -43,6 +45,12 @@ public class Interfaz extends javax.swing.JFrame {
     
     public Interfaz() {
         initComponents();
+        
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt){
+                sistema.guardar();
+            }
+        });
         
         inicializarTablero();
     }
@@ -451,6 +459,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnPasarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasarTurnoActionPerformed
         jugadorActivo = jugadorActivo == 0 ? 1 : 0;
+        btnPasarTurno.setEnabled(false);
         actualizar(null);
     }//GEN-LAST:event_btnPasarTurnoActionPerformed
 
@@ -488,7 +497,19 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_cbSonidoActionPerformed
 
     private void guardarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarJugadoresActionPerformed
-        sistema.guardarJugadores();
+        JFileChooser chooser = new JFileChooser();
+        String ruta = null;
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Archivos JSON", "JSON"));
+        int op = chooser.showSaveDialog(this);
+        if (op == JFileChooser.APPROVE_OPTION){
+            ruta = chooser.getSelectedFile().toString();
+        }
+        
+        if(!ruta.endsWith(".json"))
+            ruta += ".json";
+        
+        sistema.guardarJugadores(ruta);
     }//GEN-LAST:event_guardarJugadoresActionPerformed
 
     private void cambiarEstadoSonido(){
@@ -509,6 +530,7 @@ public class Interfaz extends javax.swing.JFrame {
         enabledBotones(true);
         partida = p;
         
+        btnPasarTurno.setEnabled(false);
         jugadorActivo = 0;
         actualizar(null);
     }
@@ -608,6 +630,8 @@ public class Interfaz extends javax.swing.JFrame {
             
             if(fichasValidas.isEmpty())
                 jugadorActivo = jugadorActivo == 0 ? 1 : 0;
+            
+            btnPasarTurno.setEnabled(!fichasValidas.isEmpty());
             
             actualizar(fichasValidas.isEmpty() ? null : fichasValidas);
             fichaSeleccionada = null;
