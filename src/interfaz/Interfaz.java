@@ -46,6 +46,8 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         
+        panelTransparente.setVisible(false);
+        
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt){
                 sistema.guardar();
@@ -641,13 +643,6 @@ public class Interfaz extends javax.swing.JFrame {
             String movimiento = fichaSeleccionada.getNumero() + "," + movi;
             ArrayList<Integer> fichasValidas = partida.hacerMovimiento(movimiento, jugadorActivo);
             
-            if(partida.debeTerminar(jugadorActivo == 0)){
-                //TERMINO LA PARTIDA
-                enabledBotones(false);
-                
-                sistema.agregarPartida(partida);
-            }
-            
             if(fichasValidas.isEmpty())
                 jugadorActivo = jugadorActivo == 0 ? 1 : 0;
             
@@ -655,6 +650,14 @@ public class Interfaz extends javax.swing.JFrame {
             
             actualizar(fichasValidas.isEmpty() ? null : fichasValidas);
             fichaSeleccionada = null;
+            
+            if(partida.debeTerminar(jugadorActivo == 0)){
+                //TERMINO LA PARTIDA
+                enabledBotones(false);
+                panelTransparente.setVisible(true);
+                
+                sistema.agregarPartida(partida);
+            }
         }
         else if (botones[fila][columna].getBackground() != Color.GRAY){
             boolean esJugadorUno = botones[fila][columna].getBackground() == colorJugadorUnoValido;
