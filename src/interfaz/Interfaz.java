@@ -189,7 +189,7 @@ public class Interfaz extends javax.swing.JFrame {
         panelPartida.setLayout(new java.awt.GridLayout(2, 0));
 
         btnAbandonar.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
-        btnAbandonar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-exit_sign.png"))); 
+        btnAbandonar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-exit_sign.png"))); 
         btnAbandonar.setText("Abandonar");
         btnAbandonar.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnAbandonar.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -202,7 +202,7 @@ public class Interfaz extends javax.swing.JFrame {
         panelPartida.add(btnAbandonar);
 
         btnPasarTurno.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
-        btnPasarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-double_right.png")));
+        btnPasarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-double_right.png")));
         btnPasarTurno.setText("Pasar turno");
         btnPasarTurno.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnPasarTurno.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -221,7 +221,7 @@ public class Interfaz extends javax.swing.JFrame {
         panelReplicarPartida.setLayout(new java.awt.GridLayout(2, 0));
 
         btnSiguienteMov.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
-        btnSiguienteMov.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-advance.png"))); // NOI18N
+        btnSiguienteMov.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-advance.png"))); // NOI18N
         btnSiguienteMov.setText("Movimiento Siguiente");
         btnSiguienteMov.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnSiguienteMov.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -233,7 +233,7 @@ public class Interfaz extends javax.swing.JFrame {
         panelReplicarPartida.add(btnSiguienteMov);
 
         btnRetomarPartida.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
-        btnRetomarPartida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-forward_arrow.png"))); // NOI18N
+        btnRetomarPartida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-forward_arrow.png"))); // NOI18N
         btnRetomarPartida.setText("Retomar partida");
         btnRetomarPartida.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnRetomarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -303,7 +303,7 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel4.setBounds(140, 190, 210, 30);
 
         fondo.setBackground(new Color(0,0,0,0));
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/sisi.png"))); // NOI18N
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/sisi.png"))); // NOI18N
         panelTransparente.add(fondo);
         fondo.setBounds(0, 0, 370, 370);
 
@@ -319,7 +319,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.add(jPanel3);
         jPanel3.setBounds(32, 29, 370, 370);
 
-        btnSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-room_sound.png"))); // NOI18N
+        btnSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-room_sound.png"))); // NOI18N
         btnSonido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSonidoActionPerformed(evt);
@@ -522,9 +522,9 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void cambiarEstadoSonido(){
         if(sonidoActivado)
-            btnSonido.setIcon(new ImageIcon(getClass().getResource("/interfaz/icons8-mute.png"))); 
+            btnSonido.setIcon(new ImageIcon(getClass().getResource("/multimedia/icons8-mute.png"))); 
         else 
-            btnSonido.setIcon(new ImageIcon(getClass().getResource("/interfaz/icons8-room_sound.png")));
+            btnSonido.setIcon(new ImageIcon(getClass().getResource("/multimedia/icons8-room_sound.png")));
        
         sonidoActivado = !sonidoActivado;
         
@@ -630,7 +630,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
     private void clickBoton(int fila, int columna) {
-        reproducirSonido("src/tap-warm.aif");
+        reproducirSonido(getClass().getResource("/multimedia/tap-warm.aif").getPath());
         if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
             int mov = columna - fichaSeleccionada.getX();
             
