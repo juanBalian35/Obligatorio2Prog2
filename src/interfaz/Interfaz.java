@@ -47,7 +47,6 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         
-        panelTransparente.setVisible(false);
         
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt){
@@ -69,6 +68,7 @@ public class Interfaz extends javax.swing.JFrame {
                 botones[i][j].setEnabled(false);
                 botones[i][j].setFont(new java.awt.Font("Heiti SC", 0, 22));
                 botones[i][j].setMargin(new Insets(0,0, 0, 0)); 
+                
             }
         }
     }
@@ -340,9 +340,12 @@ public class Interfaz extends javax.swing.JFrame {
         panelTransparente.add(jLabel4);
         jLabel4.setBounds(140, 190, 210, 30);
 
+        fondo.setBackground(new Color(0,0,0,0));
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/sisi.png"))); // NOI18N
         panelTransparente.add(fondo);
         fondo.setBounds(0, 0, 370, 370);
+
+        panelTransparente.setVisible(false);
 
         jPanel3.add(panelTransparente);
         panelTransparente.setBounds(0, 0, 370, 370);
@@ -352,7 +355,7 @@ public class Interfaz extends javax.swing.JFrame {
         panelJuego.setBounds(0, 0, 370, 370);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(32, 29, 370, 740);
+        jPanel3.setBounds(32, 29, 370, 370);
 
         btnSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-medium_volume.png"))); // NOI18N
         btnSonido.addActionListener(new java.awt.event.ActionListener() {
@@ -480,7 +483,8 @@ public class Interfaz extends javax.swing.JFrame {
     private void btnPasarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasarTurnoActionPerformed
         jugadorActivo = jugadorActivo == 0 ? 1 : 0;
         btnPasarTurno.setEnabled(false);
-        actualizar(null);
+       actualizar(null);
+        
     }//GEN-LAST:event_btnPasarTurnoActionPerformed
 
     private void btnSiguienteMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteMovActionPerformed
@@ -652,14 +656,26 @@ public class Interfaz extends javax.swing.JFrame {
             
             if(partida.debeTerminar(jugadorActivo == 0)){
                 //TERMINO LA PARTIDA
-                enabledBotones(false);
-                panelTransparente.setVisible(true);
-
+                
+                panelJuego.removeAll();
+                
+                for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 9; j++){
+                
+              panelJuego.add(botones[i][j]);
+              botones[i][j].setEnabled(false);
+              
+            }}
+                
+            
+               panelTransparente.setVisible(true);
+                //inicializarTablero();
                 Jugador ganador = partida.getJugadores()[jugadorActivo];
                 
                 ganador.setpGanadas(ganador.getpGanadas() + 1);
                 
                 sistema.agregarPartida(partida);
+                 
             }
         }
         else if (botones[fila][columna].getBackground() != Color.GRAY){
