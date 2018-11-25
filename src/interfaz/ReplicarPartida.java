@@ -8,6 +8,8 @@ package interfaz;
 
 import dominio.Partida;
 import dominio.Sistema;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -16,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author agustinintroini
  */
 public class ReplicarPartida extends javax.swing.JFrame {
-   Interfaz interfaz;
+    Interfaz interfaz;
     public ReplicarPartida(Interfaz interfaz) {
         initComponents();
         this.interfaz = interfaz;
@@ -25,7 +27,20 @@ public class ReplicarPartida extends javax.swing.JFrame {
                 "Jugador rojo", "Jugador azul", "Dia", "Hora"
         };
         
-        DefaultTableModel model = new DefaultTableModel(interfaz.getSistema().partidas(), nombreColumnas) {
+        ArrayList<Partida> partidas = interfaz.getSistema().getPartidas();
+        String datos[][] = new String[partidas.size()][4];
+        Collections.sort(partidas);
+
+        if (!partidas.isEmpty()) {
+            for (int i = 0; i < partidas.size(); i++) {
+                datos[i][0] = partidas.get(i).getJugadores()[0].getAlias();
+                datos[i][1] = partidas.get(i).getJugadores()[1].getAlias();
+                datos[i][2] = partidas.get(i).getDia();
+                datos[i][3] = partidas.get(i).getHora();
+            }
+        }
+        
+        jTable1.setModel(new DefaultTableModel(datos, nombreColumnas) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
@@ -39,8 +54,7 @@ public class ReplicarPartida extends javax.swing.JFrame {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return false;
             }
-        };
-        jTable1.setModel(model);
+        });
         jTable1.getTableHeader().setReorderingAllowed(false);
         
         for(int i = 0; i < jTable1.getColumnModel().getColumnCount(); ++i)

@@ -23,57 +23,16 @@ import org.json.simple.JSONObject;
  * */
 
 public class Sistema {
-    private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-    private ArrayList<Partida> partidas = new ArrayList<>();
+    private ArrayList<Jugador> jugadores;
+    private ArrayList<Partida> partidas;
     
     public Sistema(){
         partidas = (ArrayList<Partida>)leerArchivo("partidas.txt");
+        if(partidas == null)
+            partidas = new ArrayList<>();
         jugadores = (ArrayList<Jugador>)leerArchivo("jugadores.txt");
-    }
-    
-    public String[][] partidas(){
-        String matriz[][] = new String[partidas.size()][4];
-        Collections.sort(partidas);
-
-        if (!partidas.isEmpty()) {
-            for (int i = 0; i < partidas.size(); i++) {
-                matriz[i][0] = partidas.get(i).getJugadores()[0].getAlias();
-                matriz[i][1] = partidas.get(i).getJugadores()[1].getAlias();
-                matriz[i][2] = partidas.get(i).getDia();
-                matriz[i][3] = partidas.get(i).getHora();
-            }
-        }
-        return matriz;
-    }
-    
-    public String[][] ranking(){
-        String matriz[][] = new String[jugadores.size()][5];
-        Collections.sort(jugadores);
-      
-        if (!jugadores.isEmpty()) {
-            Jugador jugadorAnterior = jugadores.get(0);
-            int posicion = 1;
-            for (int i = 0; i < jugadores.size(); i++) {
-                Jugador j1 = jugadores.get(i);
-                if (jugadorAnterior.getpGanadas() == j1.getpGanadas()){
-                   matriz[i][0] = Integer.toString(posicion);
-                   matriz[i][1] = j1.getNombre();
-                   matriz[i][2] = j1.getAlias();
-                   matriz[i][3] = Integer.toString(j1.getEdad());
-                   matriz[i][4] = Integer.toString(j1.getpGanadas());
-                }
-                else{
-                    posicion = i + 1;
-                    matriz[i][0] = Integer.toString(posicion);
-                    matriz[i][1] = j1.getNombre();
-                    matriz[i][2] = j1.getAlias();
-                    matriz[i][3] = Integer.toString(j1.getEdad());
-                    matriz[i][4] = Integer.toString(j1.getpGanadas());
-                }
-                jugadorAnterior = jugadores.get(i);
-            }
-        }    
-        return matriz;
+        if(jugadores == null)
+             jugadores = new ArrayList<>();
     }
 
     public Jugador buscarJugador(String alias){
@@ -89,19 +48,18 @@ public class Sistema {
     }
     
     public void guardarJugadores(String ruta){
-        JSONObject object = new JSONObject();
         JSONArray array = new JSONArray();
         for(Jugador jugador : jugadores){
-            JSONObject jugadoSr = new JSONObject();
+            JSONObject jugadorJSON = new JSONObject();
             
-            jugadoSr.put("nombre", jugador.getNombre());
-            jugadoSr.put("alias", jugador.getAlias());
-            jugadoSr.put("edad", jugador.getEdad());
-            jugadoSr.put("pGanadas", jugador.getpGanadas());
+            jugadorJSON.put("nombre", jugador.getNombre());
+            jugadorJSON.put("alias", jugador.getAlias());
+            jugadorJSON.put("edad", jugador.getEdad());
+            jugadorJSON.put("pGanadas", jugador.getpGanadas());
             
-            array.add(jugadoSr);
+            array.add(jugadorJSON);
         }
-        //object.put("jugadores", array);
+        
         try (FileWriter file = new FileWriter(ruta)) {
             file.write(array.toJSONString());
             System.out.println(array.toJSONString());

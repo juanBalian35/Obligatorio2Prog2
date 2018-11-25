@@ -121,7 +121,7 @@ public class Prueba {
                         aliasJugador = ingresarString(scanner, "Ingrese alias del segundo jugador:");
                         if (sistema.buscarJugador(aliasJugador) == null)
                             System.out.println("No existe un jugador con ese alias, intente de nuevo");
-                        if(aliasJugador.equals(j1.getAlias()))
+                        if (aliasJugador.equals(j1.getAlias()))
                             System.out.println("El segundo jugador no puede ser igual al primero");
                     } while ((sistema.buscarJugador(aliasJugador) == null)||(aliasJugador.equals(j1.getAlias())));
 
@@ -141,7 +141,6 @@ public class Prueba {
                     //sistema.replicar();
                     break;
                 case "4":
-                    sistema.ranking();
                     break;
                 case "0":
                     salir=true;

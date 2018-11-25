@@ -5,6 +5,9 @@
  */
 package interfaz;
 
+import dominio.Jugador;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +24,36 @@ public class Ranking extends javax.swing.JFrame {
             "N°", "Nombre", "Alias", "Edad", "N° de ganadas"
         };
         
-        DefaultTableModel modelo = new DefaultTableModel(interfaz.getSistema().ranking(), nombreColumnas){
+        
+        ArrayList<Jugador> jugadores = interfaz.getSistema().getJugadores();
+        String datos[][] = new String[jugadores.size()][5];
+        Collections.sort(jugadores);
+      
+        if (!jugadores.isEmpty()) {
+            Jugador jugadorAnterior = jugadores.get(0);
+            int posicion = 1;
+            for (int i = 0; i < jugadores.size(); i++) {
+                Jugador j1 = jugadores.get(i);
+                if (jugadorAnterior.getpGanadas() == j1.getpGanadas()){
+                   datos[i][0] = Integer.toString(posicion);
+                   datos[i][1] = j1.getNombre();
+                   datos[i][2] = j1.getAlias();
+                   datos[i][3] = Integer.toString(j1.getEdad());
+                   datos[i][4] = Integer.toString(j1.getpGanadas());
+                }
+                else{
+                    posicion = i + 1;
+                    datos[i][0] = Integer.toString(posicion);
+                    datos[i][1] = j1.getNombre();
+                    datos[i][2] = j1.getAlias();
+                    datos[i][3] = Integer.toString(j1.getEdad());
+                    datos[i][4] = Integer.toString(j1.getpGanadas());
+                }
+                jugadorAnterior = jugadores.get(i);
+            }
+        };
+        
+        DefaultTableModel modelo = new DefaultTableModel(datos, nombreColumnas){
                 Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };

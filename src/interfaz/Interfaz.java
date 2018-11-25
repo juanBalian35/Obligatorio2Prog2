@@ -2,6 +2,7 @@
 package interfaz;
 
 import dominio.Ficha;
+import dominio.Jugador;
 import dominio.Partida;
 import dominio.Sistema;
 import dominio.Tablero;
@@ -530,8 +531,6 @@ public class Interfaz extends javax.swing.JFrame {
         
             sistema.guardarJugadores(ruta);
         }
-        
-        
     }//GEN-LAST:event_guardarJugadoresActionPerformed
 
     private void cambiarEstadoSonido(){
@@ -630,7 +629,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
     private void clickBoton(int fila, int columna) {
-       reproducirSonido("src/tap-warm.aif");
+        reproducirSonido("src/tap-warm.aif");
         if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
             int mov = columna - fichaSeleccionada.getX();
             
@@ -655,6 +654,10 @@ public class Interfaz extends javax.swing.JFrame {
                 //TERMINO LA PARTIDA
                 enabledBotones(false);
                 panelTransparente.setVisible(true);
+
+                Jugador ganador = partida.getJugadores()[jugadorActivo];
+                
+                ganador.setpGanadas(ganador.getpGanadas() + 1);
                 
                 sistema.agregarPartida(partida);
             }
@@ -670,10 +673,10 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
             
-            ArrayList<Integer> posPos = partida.posicionesPosibles(columna, fila, esJugadorUno);
+            ArrayList<Integer> posPosibles = partida.posicionesPosibles(columna, fila, esJugadorUno);
 
-            for(int i = 0; i < posPos.size(); i+=2)
-                botones[posPos.get(i+1)][posPos.get(i)].setBackground(colorMovimientosValidos);
+            for(int i = 0; i < posPosibles.size(); i+=2)
+                botones[posPosibles.get(i+1)][posPosibles.get(i)].setBackground(colorMovimientosValidos);
 
             int f = Integer.parseInt(botones[fila][columna].getText());
 

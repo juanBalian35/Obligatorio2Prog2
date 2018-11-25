@@ -32,7 +32,6 @@ public class Tablero implements Serializable {
             matriz[ficha.getY()][ficha.getX()] = ficha;
     }
     
-    
     public ArrayList<Integer> fichasValidas(Ficha ficha, boolean esJugadorUno){
         ArrayList<Integer> movValidos = new ArrayList<>();
 
@@ -164,18 +163,14 @@ public class Tablero implements Serializable {
         return matriz[y][x] != null;
     }
     
-    public Ficha[][] getMatriz(){
-        return matriz;
-    }
-    
     //DEBUG: koakoakoakoala
     private String lineaSeparatoria(){
-            String s = "";
+        String s = "";
 
-            for(int j = 0; j < ANCHO*2+1; ++j)
-                s += ((j % 2 == 0 ? "+" : "-"));
+        for(int j = 0; j < ANCHO*2+1; ++j)
+            s += ((j % 2 == 0 ? "+" : "-"));
 
-            return s;
+        return s;
     }
 
     public void mostrar(boolean reducido){
