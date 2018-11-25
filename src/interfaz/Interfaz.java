@@ -184,16 +184,16 @@ public class Interfaz extends javax.swing.JFrame {
         LblMovimientosRestantes.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
         LblMovimientosRestantes.setText("Movimientos restantes:");
         jPanel1.add(LblMovimientosRestantes);
-        LblMovimientosRestantes.setBounds(32, 417, 184, 24);
+        LblMovimientosRestantes.setBounds(32, 417, 200, 20);
 
         panelPartida.setLayout(new java.awt.GridLayout(2, 0));
 
         btnAbandonar.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
-        btnAbandonar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-exit_sign.png"))); 
+        btnAbandonar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-exit_sign.png"))); // NOI18N
         btnAbandonar.setText("Abandonar");
+        btnAbandonar.setEnabled(false);
         btnAbandonar.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnAbandonar.setHorizontalTextPosition(SwingConstants.CENTER);
-        btnAbandonar.setEnabled(false);
         btnAbandonar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbandonarActionPerformed(evt);
@@ -202,11 +202,11 @@ public class Interfaz extends javax.swing.JFrame {
         panelPartida.add(btnAbandonar);
 
         btnPasarTurno.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
-        btnPasarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-double_right.png")));
+        btnPasarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-double_right.png"))); // NOI18N
         btnPasarTurno.setText("Pasar turno");
+        btnPasarTurno.setEnabled(false);
         btnPasarTurno.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnPasarTurno.setHorizontalTextPosition(SwingConstants.CENTER);
-        btnPasarTurno.setEnabled(false);
         btnPasarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasarTurnoActionPerformed(evt);
@@ -214,15 +214,11 @@ public class Interfaz extends javax.swing.JFrame {
         });
         panelPartida.add(btnPasarTurno);
 
-        panelReplicarPartida.setMaximumSize(new java.awt.Dimension(180, 260));
-        panelReplicarPartida.setMinimumSize(new java.awt.Dimension(180, 260));
-        panelReplicarPartida.setPreferredSize(new java.awt.Dimension(180, 260));
-        panelReplicarPartida.setSize(new java.awt.Dimension(180, 260));
         panelReplicarPartida.setLayout(new java.awt.GridLayout(2, 0));
 
         btnSiguienteMov.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
         btnSiguienteMov.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-advance.png"))); // NOI18N
-        btnSiguienteMov.setText("Movimiento Siguiente");
+        btnSiguienteMov.setText("Siguiente movimiento");
         btnSiguienteMov.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnSiguienteMov.setHorizontalTextPosition(SwingConstants.CENTER);
         btnSiguienteMov.addActionListener(new java.awt.event.ActionListener() {
@@ -250,32 +246,32 @@ public class Interfaz extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 180, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelReplicarPartida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 
-                    javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(panelReplicarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 1, Short.MAX_VALUE)))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelPartida, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(panelPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 260, Short.MAX_VALUE)
+            .addGap(0, 200, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelReplicarPartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelReplicarPartida, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panelPartida, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+                .addComponent(panelPartida, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
         );
 
         panelReplicarPartida.setVisible(false);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(437, 59, 180, 260);
-
-        jPanel2.setAlignmentX(0.0F);
-        jPanel2.setAlignmentY(0.0F);
+        jPanel2.setBounds(437, 59, 180, 200);
 
         lblMovRest.setFont(new java.awt.Font("Heiti TC", 2, 18)); // NOI18N
         lblMovRest.setForeground(new java.awt.Color(0, 153, 0));
         jPanel1.add(lblMovRest);
-        lblMovRest.setBounds(240, 420, 30, 20);
+        lblMovRest.setBounds(220, 420, 30, 20);
 
         jPanel3.setLayout(null);
 
@@ -326,7 +322,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSonido);
-        btnSonido.setBounds(600, 400, 40, 40);
+        btnSonido.setBounds(560, 390, 40, 40);
 
         jMenuPartida.setText("Partida");
 
@@ -398,7 +394,7 @@ public class Interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
