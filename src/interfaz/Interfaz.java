@@ -47,6 +47,7 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         
+        LblMovimientosRestantes.setVisible(false);
         
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt){
@@ -145,7 +146,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        LblMovimientosRestantes = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         panelPartida = new javax.swing.JPanel();
         btnAbandonar = new javax.swing.JButton();
@@ -180,15 +181,19 @@ public class Interfaz extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
-        jLabel1.setText("Movimientos restantes:");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(32, 417, 200, 20);
+        LblMovimientosRestantes.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
+        LblMovimientosRestantes.setText("Movimientos restantes:");
+        jPanel1.add(LblMovimientosRestantes);
+        LblMovimientosRestantes.setBounds(32, 417, 184, 24);
 
         panelPartida.setLayout(new java.awt.GridLayout(2, 0));
 
         btnAbandonar.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
+        btnAbandonar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-exit_sign.png"))); 
         btnAbandonar.setText("Abandonar");
+        btnAbandonar.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnAbandonar.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnAbandonar.setEnabled(false);
         btnAbandonar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbandonarActionPerformed(evt);
@@ -197,7 +202,11 @@ public class Interfaz extends javax.swing.JFrame {
         panelPartida.add(btnAbandonar);
 
         btnPasarTurno.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
+        btnPasarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-double_right.png")));
         btnPasarTurno.setText("Pasar turno");
+        btnPasarTurno.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnPasarTurno.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnPasarTurno.setEnabled(false);
         btnPasarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPasarTurnoActionPerformed(evt);
@@ -205,10 +214,17 @@ public class Interfaz extends javax.swing.JFrame {
         });
         panelPartida.add(btnPasarTurno);
 
+        panelReplicarPartida.setMaximumSize(new java.awt.Dimension(180, 260));
+        panelReplicarPartida.setMinimumSize(new java.awt.Dimension(180, 260));
+        panelReplicarPartida.setPreferredSize(new java.awt.Dimension(180, 260));
+        panelReplicarPartida.setSize(new java.awt.Dimension(180, 260));
         panelReplicarPartida.setLayout(new java.awt.GridLayout(2, 0));
 
         btnSiguienteMov.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
-        btnSiguienteMov.setText("<html><center>" + "Movimiento" + "<br>" + "siguiente" + "</center></html>");
+        btnSiguienteMov.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-advance.png"))); // NOI18N
+        btnSiguienteMov.setText("Movimiento Siguiente");
+        btnSiguienteMov.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnSiguienteMov.setHorizontalTextPosition(SwingConstants.CENTER);
         btnSiguienteMov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteMovActionPerformed(evt);
@@ -217,7 +233,10 @@ public class Interfaz extends javax.swing.JFrame {
         panelReplicarPartida.add(btnSiguienteMov);
 
         btnRetomarPartida.setFont(new java.awt.Font("Heiti SC", 0, 13)); // NOI18N
+        btnRetomarPartida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-forward_arrow.png"))); // NOI18N
         btnRetomarPartida.setText("Retomar partida");
+        btnRetomarPartida.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnRetomarPartida.setHorizontalTextPosition(SwingConstants.CENTER);
         btnRetomarPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRetomarPartidaActionPerformed(evt);
@@ -229,42 +248,34 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
+            .addGap(0, 180, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelReplicarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(26, Short.MAX_VALUE)))
+                .addComponent(panelReplicarPartida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 
+                    javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(26, Short.MAX_VALUE)))
+                .addComponent(panelPartida, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 260, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addGap(12, 12, 12)
-                    .addComponent(panelReplicarPartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(panelReplicarPartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(14, Short.MAX_VALUE)
-                    .addComponent(panelPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                .addComponent(panelPartida, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
         );
 
         panelReplicarPartida.setVisible(false);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(437, 59, 170, 200);
+        jPanel2.setBounds(437, 59, 180, 260);
+
+        jPanel2.setAlignmentX(0.0F);
+        jPanel2.setAlignmentY(0.0F);
 
         lblMovRest.setFont(new java.awt.Font("Heiti TC", 2, 18)); // NOI18N
         lblMovRest.setForeground(new java.awt.Color(0, 153, 0));
         jPanel1.add(lblMovRest);
-        lblMovRest.setBounds(220, 420, 30, 20);
+        lblMovRest.setBounds(240, 420, 30, 20);
 
         jPanel3.setLayout(null);
 
@@ -280,9 +291,10 @@ public class Interfaz extends javax.swing.JFrame {
 
         lblAlias.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
         lblAlias.setForeground(new java.awt.Color(255, 0, 51));
+        lblAlias.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAlias.setText("Jugador");
         panelTransparente.add(lblAlias);
-        lblAlias.setBounds(30, 190, 130, 30);
+        lblAlias.setBounds(30, 190, 100, 30);
 
         jLabel4.setFont(new java.awt.Font("Heiti SC", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -307,14 +319,14 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.add(jPanel3);
         jPanel3.setBounds(32, 29, 370, 370);
 
-        btnSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-medium_volume.png"))); // NOI18N
+        btnSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfaz/icons8-room_sound.png"))); // NOI18N
         btnSonido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSonidoActionPerformed(evt);
             }
         });
         jPanel1.add(btnSonido);
-        btnSonido.setBounds(560, 390, 40, 40);
+        btnSonido.setBounds(600, 400, 40, 40);
 
         jMenuPartida.setText("Partida");
 
@@ -386,7 +398,7 @@ public class Interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,19 +435,43 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_replicarPartidaActionPerformed
 
     private void btnAbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbandonarActionPerformed
-        // TODO add your handling code here:
+        String nombreJugador = "<font style='font-weight:bold' color=" + 
+                (jugadorActivo == 0 ? "#ff0000>" : "#0000ff>") + 
+                partida.getJugadores()[jugadorActivo].getAlias() + "</font>";
+        
+        String[] opciones = {"SI", "NO"};
+        int i = JOptionPane.showOptionDialog(this, 
+                "<html>¿Está seguro que desea abandonar la partida, " + 
+                nombreJugador + "?</html>", "¿Está seguro?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,"NO");
+        if(i == JOptionPane.YES_OPTION){  
+            partida.hacerMovimiento("X", jugadorActivo);
+            //Si abandona el jugador activo, el ganador es el otro
+            jugadorActivo = jugadorActivo == 0 ? 1 : 0;
+            terminarPartida();
+        }  
     }//GEN-LAST:event_btnAbandonarActionPerformed
 
     private void btnPasarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasarTurnoActionPerformed
         jugadorActivo = jugadorActivo == 0 ? 1 : 0;
         btnPasarTurno.setEnabled(false);
-       actualizar(null);
-        
+        actualizar(null);
     }//GEN-LAST:event_btnPasarTurnoActionPerformed
 
     private void btnSiguienteMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteMovActionPerformed
         //SIGUIENTE PASO
         String mov = movimientosReplicar.remove(0);
+
+        if(mov.startsWith("X")){
+            btnSiguienteMov.setEnabled(false);
+            btnRetomarPartida.setEnabled(false);
+            movimientosReplicar = null;
+            
+            //Si abandona el jugador activo, el ganador es el otro4
+            jugadorActivo = jugadorActivo == 0 ? 1 : 0;
+            
+            terminarPartida();
+            return;
+        }
         
         jugadorActivo = Integer.parseInt("" + mov.charAt(4));
         
@@ -443,9 +479,10 @@ public class Interfaz extends javax.swing.JFrame {
         
         // Termino la partida
         if(movimientosReplicar.isEmpty()){
-            actualizar(new ArrayList<>());
             btnSiguienteMov.setEnabled(false);
+            btnRetomarPartida.setEnabled(false);
             movimientosReplicar = null;
+            terminarPartida();
         }
         else
             actualizar(fichasValidas);                            
@@ -487,7 +524,7 @@ public class Interfaz extends javax.swing.JFrame {
         if(sonidoActivado)
             btnSonido.setIcon(new ImageIcon(getClass().getResource("/interfaz/icons8-mute.png"))); 
         else 
-            btnSonido.setIcon(new ImageIcon(getClass().getResource("/interfaz/icons8-medium_volume.png")));
+            btnSonido.setIcon(new ImageIcon(getClass().getResource("/interfaz/icons8-room_sound.png")));
        
         sonidoActivado = !sonidoActivado;
         
@@ -500,8 +537,16 @@ public class Interfaz extends javax.swing.JFrame {
         
         enabledBotones(true);
         partida = p;
+        panelTransparente.setVisible(false);
+        
+        if(p.getFormaDeTerminar() == 1){
+            lblMovRest.setVisible(true);
+            LblMovimientosRestantes.setVisible(true);
+        }
         
         btnPasarTurno.setEnabled(false);
+        btnAbandonar.setEnabled(true);
+        
         jugadorActivo = 0;
         actualizar(null);
     }
@@ -509,6 +554,12 @@ public class Interfaz extends javax.swing.JFrame {
     public void replicar(Partida p){
         panelPartida.setVisible(false);
         panelReplicarPartida.setVisible(true);
+        panelTransparente.setVisible(false);
+        
+        if(p.getFormaDeTerminar() == 1){
+            lblMovRest.setVisible(true);
+            LblMovimientosRestantes.setVisible(true);
+        }
         
         movimientosReplicar = (ArrayList<String>)p.getMovimientos().clone();
         
@@ -601,27 +652,7 @@ public class Interfaz extends javax.swing.JFrame {
             fichaSeleccionada = null;
             
             if(partida.debeTerminar(jugadorActivo == 0)){
-                //TERMINO LA PARTIDA
-                
-
-               
-                panelTransparente.setVisible(true);
-                
-                panelJuego.removeAll();
-                inicializarTablero();
-                panelPartida.setEnabled(false);
-              
-                
-               
-                Jugador ganador = partida.getJugadores()[jugadorActivo];
-                
-                ganador.setpGanadas(ganador.getpGanadas() + 1);
-                
-                sistema.agregarPartida(partida);
-                
-              
-               
-                 
+                terminarPartida();
             }
         }
         else if (botones[fila][columna].getBackground() != Color.GRAY){
@@ -648,7 +679,26 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
 
+    private void terminarPartida(){
+        panelTransparente.setVisible(true);
+        btnAbandonar.setEnabled(false);
+        btnPasarTurno.setEnabled(false);
+        lblMovRest.setVisible(false);
+        LblMovimientosRestantes.setVisible(false);
+                
+        panelJuego.removeAll();
+        inicializarTablero();
+              
+        Jugador ganador = partida.getJugadores()[jugadorActivo];
+        ganador.setpGanadas(ganador.getpGanadas() + 1);
+
+        lblAlias.setText(ganador.getAlias());
+        lblAlias.setForeground(jugadorActivo == 0 ? Color.RED : Color.BLUE);
+        
+        sistema.agregarPartida(partida);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LblMovimientosRestantes;
     private javax.swing.JMenuItem agregarJugador;
     private javax.swing.JMenu ayuda;
     private javax.swing.JButton btnAbandonar;
@@ -659,7 +709,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem cbSonido;
     private javax.swing.JLabel fondo;
     private javax.swing.JMenuItem guardarJugadores;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
@@ -679,5 +728,4 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem ranking;
     private javax.swing.JMenuItem replicarPartida;
     // End of variables declaration//GEN-END:variables
-
 }

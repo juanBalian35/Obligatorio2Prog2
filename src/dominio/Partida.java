@@ -106,6 +106,11 @@ public class Partida implements Comparable<Partida>, Serializable {
     }
 
     public ArrayList<Integer> hacerMovimiento(String movimiento, int numJugador){
+        movimientos.add(movimiento + " " + numJugador);
+        
+        if("X".equals(movimiento))
+            return null;
+        
         String[] a = movimiento.split(",");
 
         Ficha ficha = fichaAMover(movimiento, jugadores[numJugador]);
@@ -114,14 +119,12 @@ public class Partida implements Comparable<Partida>, Serializable {
 
         if(a[1].equals("D"))
             ficha.setX(ficha.getX() + 1);
-        if(a[1].equals("I"))
+        else if(a[1].equals("I"))
             ficha.setX(ficha.getX() - 1);
         
-        movimientos.add(movimiento + " " + numJugador);
         tablero.actualizar(jugadores);
         
         return tablero.fichasValidas(ficha, numJugador == 0);
-        //tablero.mostrar(true);
     }
 
     private static Ficha fichaAMover(String movimiento, Jugador jugador){
@@ -132,13 +135,6 @@ public class Partida implements Comparable<Partida>, Serializable {
                 filter(x -> x.getNumero() == num).
                 findFirst().
                 get();
-    }
-
-    private int ultimaFichaMovida(boolean esJugador1){
-        if(!movimientos.isEmpty())
-            if(movimientos.get(movimientos.size() - 1).charAt(4) == (esJugador1 ? '1' : '2'))
-                return Integer.parseInt(movimientos.get(movimientos.size() - 1).charAt(0) + "");
-        return -1;
     }
 
     public boolean debeTerminar(boolean esJugadorUno){
