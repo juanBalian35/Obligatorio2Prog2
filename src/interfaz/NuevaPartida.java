@@ -260,6 +260,7 @@ public class NuevaPartida extends javax.swing.JFrame {
         jPanel1.setBounds(10, 50, 480, 240);
 
         jLabel1.setFont(new java.awt.Font("Heiti SC", 0, 16)); // NOI18N
+        jLabel1.setForeground(Interfaz.colorBotonesVacios);
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Deben existir al menos dos jugadores para iniciar la partida");
         jPanel4.add(jLabel1);

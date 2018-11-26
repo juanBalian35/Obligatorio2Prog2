@@ -580,7 +580,8 @@ public class Interfaz extends javax.swing.JFrame {
         reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
         if(sistema.getJugadores().isEmpty()){
             JOptionPane.showMessageDialog(this, "Aún no se han registrado jugadores","No hay jugadores",JOptionPane.INFORMATION_MESSAGE);
-
+  
+            
         }else{
         JFileChooser chooser = new JFileChooser();
         String ruta = null;
