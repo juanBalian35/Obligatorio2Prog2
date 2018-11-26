@@ -10,7 +10,6 @@ import java.util.Set;
  *   Juan Balian - 211150
  *   Agustín Introini - 211064
  * */
-
 public class Tablero implements Serializable {
     public static final int ANCHO = 9;
     public static final int LARGO = 8;

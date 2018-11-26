@@ -1,6 +1,5 @@
 package dominio;
 
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,7 +17,6 @@ import org.json.simple.JSONObject;
  *   Juan Balian - 211150
  *   Agustín Introini - 211064
  * */
-
 public class Sistema {
     private ArrayList<Jugador> jugadores;
     private ArrayList<Partida> partidas;
@@ -111,4 +109,3 @@ public class Sistema {
         jugadores.add(jugador);
     }
 }
-

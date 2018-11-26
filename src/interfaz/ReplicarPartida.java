@@ -1,11 +1,9 @@
 package interfaz;
 
-
 import dominio.Partida;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.table.DefaultTableModel;
-
 
 /*
  * Creado por:

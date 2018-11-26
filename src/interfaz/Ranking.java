@@ -69,9 +69,8 @@ public class Ranking extends javax.swing.JFrame {
         for(int i = 0; i < jTabla.getColumnModel().getColumnCount(); ++i)
             jTabla.getColumnModel().getColumn(i).setResizable(false);
         
-        if(interfaz.getSistema().getJugadores().isEmpty()){
+        if(interfaz.getSistema().getJugadores().isEmpty())
             jSP.setVisible(false);
-        }
     }
 
     /**
@@ -178,31 +177,7 @@ public class Ranking extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         interfaz.setEnabled(true);
         dispose();
-        
     }//GEN-LAST:event_btnSalirActionPerformed
-/*public static void agregar(String matriz[][]){
-    jTabla.setModel(new javax.swing.table.DefaultTableModel(
-            matriz,
-            new String [] {
-                "nro", "nombre", "alias", "edad", "cant ganadas"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-}*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;

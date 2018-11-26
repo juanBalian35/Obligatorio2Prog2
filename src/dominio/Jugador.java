@@ -7,7 +7,6 @@ import java.io.Serializable;
  *   Juan Balian - 211150
  *   Agustín Introini - 211064
  * */
-
 public class Jugador implements Comparable<Jugador>, Serializable {
     public static final int NUM_FICHAS = 8;
 

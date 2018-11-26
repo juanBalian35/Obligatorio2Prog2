@@ -17,10 +17,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.swing.*;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.BorderFactory;
 
 /*
  * Creado por:
@@ -127,12 +132,13 @@ public class Interfaz extends javax.swing.JFrame {
             }
         }
         
-       Color color = jugadorActivo == 0 ? colorJugadorUnoValido : colorJugadorDosValido;
-       Color co = jugadorActivo == 0 ? colorJugadorUnoInvalido : colorJugadorDosInvalido;
+        // Si hay una ficha al final del tablero esta no se va a poder mover mas
+       Color colorValido = jugadorActivo == 0 ? colorJugadorUnoValido : colorJugadorDosValido;
+       Color colorInvalido = jugadorActivo == 0 ? colorJugadorUnoInvalido : colorJugadorDosInvalido;
        
        for(int i = 0, fila = jugadorActivo == 0 ? 0 : Tablero.LARGO - 1; i < botones[fila].length; ++i)
-           if(botones[fila][i].getBackground() == color)
-                botones[fila][i].setBackground(co);
+           if(botones[fila][i].getBackground() == colorValido)
+                botones[fila][i].setBackground(colorInvalido);
     }
     
     private void limpiarCeldasVerdes(){
@@ -582,21 +588,22 @@ public class Interfaz extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Aún no se han registrado jugadores","No hay jugadores",JOptionPane.INFORMATION_MESSAGE);
   
             
-        }else{
-        JFileChooser chooser = new JFileChooser();
-        String ruta = null;
-        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Archivos json", "json"));
-                chooser.setAcceptAllFileFilterUsed(false);
-
-        int op = chooser.showSaveDialog(this);
-        if (op == JFileChooser.APPROVE_OPTION){
-            ruta = chooser.getSelectedFile().toString();
-            if(!ruta.endsWith(".json"))
-                ruta += ".json";
-        
-            sistema.guardarJugadores(ruta);
         }
+        else{
+            JFileChooser chooser = new JFileChooser();
+            String ruta = null;
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            chooser.addChoosableFileFilter(new FileNameExtensionFilter("Archivos json", "json"));
+                    chooser.setAcceptAllFileFilterUsed(false);
+
+            int op = chooser.showSaveDialog(this);
+            if (op == JFileChooser.APPROVE_OPTION){
+                ruta = chooser.getSelectedFile().toString();
+                if(!ruta.endsWith(".json"))
+                    ruta += ".json";
+
+                sistema.guardarJugadores(ruta);
+            }
         }    }//GEN-LAST:event_btnGuardarJugadoresActionPerformed
 
     private void btnAgregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarJugadorActionPerformed
@@ -775,7 +782,6 @@ public class Interfaz extends javax.swing.JFrame {
             botonMenuEnablear(btnPasarTurno,!fichasValidas.isEmpty());
             
             if(fichasValidas.isEmpty()){
-                System.out.println("mejor kambiemo");
                 jugadorActivo = jugadorActivo == 0 ? 1 : 0;
                 lblAzul.setText(partida.getJugadores()[jugadorActivo].getAlias());
                 lblAzul.setForeground(jugadorActivo == 0 ? Color.RED : Color.BLUE);

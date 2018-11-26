@@ -317,7 +317,8 @@ public class NuevaPartida extends javax.swing.JFrame {
         
         if(jListRojo.isSelectionEmpty()||jListAzul.isSelectionEmpty()){
             JOptionPane.showMessageDialog(this, "Debe seleccionar dos jugadores","Atención",JOptionPane.WARNING_MESSAGE);
-        }else{
+        }
+        else{
             jugadores[0] = interfaz.getSistema().getJugadores().get(jListRojo.getSelectedIndex());
             jugadores[1] = interfaz.getSistema().getJugadores().get(jListAzul.getSelectedIndex());
 
@@ -337,11 +338,11 @@ public class NuevaPartida extends javax.swing.JFrame {
         if(jCB_FTerminar.getSelectedIndex()!=0){
             spinnerMovimientos.setEnabled(false);
             jLabel3.setEnabled(false);
-        }else{
+        }
+        else{
             spinnerMovimientos.setEnabled(true);
             jLabel3.setEnabled(true);
         }
-        
     }//GEN-LAST:event_jCB_FTerminarItemStateChanged
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

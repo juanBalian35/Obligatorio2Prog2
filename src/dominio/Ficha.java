@@ -1,4 +1,3 @@
-
 package dominio;
 
 import java.io.Serializable;
@@ -8,7 +7,6 @@ import java.io.Serializable;
  *   Juan Balian - 211150
  *   Agustín Introini - 211064
  * */
-//me gusta el queso cheddar
 public class Ficha implements Serializable {
     private int x;
     private int y;

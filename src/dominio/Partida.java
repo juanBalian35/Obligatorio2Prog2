@@ -6,12 +6,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+
 /*
 * Creado por:
 *   Juan Balian - 211150
 *   Agustín Introini - 211064
 * */
-
 public class Partida implements Comparable<Partida>, Serializable {
     private Tablero tablero = new Tablero();
     private Jugador[] jugadores;

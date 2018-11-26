@@ -2,7 +2,6 @@ package interfaz;
 
 import dominio.Jugador;
 import dominio.Sistema;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner.DefaultEditor;
 
@@ -12,12 +11,8 @@ import javax.swing.JSpinner.DefaultEditor;
  *   Agustín Introini - 211064
  * */
 public class AgregarJugador extends javax.swing.JFrame {
-
     Interfaz interfaz;
 
-    /**
-     * Creates new form agregarJugador
-     */
     public AgregarJugador(Interfaz interfaz) {
         initComponents();
         this.interfaz = interfaz;
@@ -226,29 +221,29 @@ public class AgregarJugador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-     Sistema sistema = interfaz.getSistema();
-     String alias="", nombre="";
-     int edad=(int)spinnerEdad.getValue();
+        Sistema sistema = interfaz.getSistema();
+        String alias = "", nombre = "";
+        int edad= (int) spinnerEdad.getValue();
         if(txtNombre.getText().trim().isEmpty()){
-          lblErrorNombre.setVisible(true);
-          lblErrorNombre.setToolTipText("Ingrese un nombre");
-      }
+            lblErrorNombre.setVisible(true);
+            lblErrorNombre.setToolTipText("Ingrese un nombre");
+        }
         else{
-          nombre = txtNombre.getText();
-      }
+            nombre = txtNombre.getText();
+        }
       
-      if(txtAlias.getText().trim().isEmpty()){
-          lblErrorAlias.setVisible(true);
-          lblErrorAlias.setToolTipText("Ingrese un alias");
-      }
-      else if (null != sistema.buscarJugador(txtAlias.getText())){
-          lblErrorAlias.setVisible(true);
-          lblErrorAlias.setToolTipText("Alias en uso");
-      }
-      else{
-          alias = txtAlias.getText();
-      }
-      if(!alias.isEmpty() && !nombre.isEmpty()){
+        if(txtAlias.getText().trim().isEmpty()){
+            lblErrorAlias.setVisible(true);
+            lblErrorAlias.setToolTipText("Ingrese un alias");
+        }
+        else if (null != sistema.buscarJugador(txtAlias.getText())){
+            lblErrorAlias.setVisible(true);
+            lblErrorAlias.setToolTipText("Alias en uso");
+        }
+        else{
+            alias = txtAlias.getText();
+        }
+        if(!alias.isEmpty() && !nombre.isEmpty()){
             Jugador jugador = new Jugador(nombre, alias, edad);
             String [] botones = { "Agregar", "Cancelar"};
             if(JOptionPane.showOptionDialog (this, "¿Está seguro que desea agregar a este jugador?", "Agregar jugador", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null/*icono*/, botones, botones[0]) == 0) {
@@ -262,12 +257,10 @@ public class AgregarJugador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtAliasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAliasMouseClicked
-               lblErrorAlias.setVisible(false);
-
+        lblErrorAlias.setVisible(false);
     }//GEN-LAST:event_txtAliasMouseClicked
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombreMouseClicked
@@ -280,9 +273,7 @@ public class AgregarJugador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
     }//GEN-LAST:event_formWindowClosed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
