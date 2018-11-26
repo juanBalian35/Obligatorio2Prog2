@@ -475,6 +475,8 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbandonarActionPerformed
+        reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
+        
         String nombreJugador = "<font style='font-weight:bold' color=" + 
                 (jugadorActivo == 0 ? "#ff0000>" : "#0000ff>") + 
                 partida.getJugadores()[jugadorActivo].getAlias() + "</font>";
@@ -495,6 +497,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAbandonarActionPerformed
 
     private void btnPasarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasarTurnoActionPerformed
+        reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
+        
         jugadorActivo = jugadorActivo == 0 ? 1 : 0;
         lblAzul.setText(partida.getJugadores()[jugadorActivo].getAlias());
         lblAzul.setForeground(jugadorActivo == 0 ? Color.RED: Color.BLUE);
@@ -545,6 +549,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSiguienteMovActionPerformed
 
     private void btnRetomarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetomarPartidaActionPerformed
+        reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
+        
         panelPartida.setVisible(true);
         panelReplicarPartida.setVisible(false);
         botonMenuEnablear(btnAbandonar, true);
@@ -557,17 +563,23 @@ public class Interfaz extends javax.swing.JFrame {
 ;    }//GEN-LAST:event_btnSonidoActionPerformed
 
     private void btnReplicarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReplicarPartidaActionPerformed
- ReplicarPartida repPartida= new ReplicarPartida(this);
+        reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
+        
+        ReplicarPartida repPartida= new ReplicarPartida(this);
         repPartida.setVisible(true);
         this.setEnabled(false);    }//GEN-LAST:event_btnReplicarPartidaActionPerformed
 
     private void btnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaPartidaActionPerformed
-      NuevaPartida nuevaPartida=new NuevaPartida(this);
+        reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
+        
+        NuevaPartida nuevaPartida=new NuevaPartida(this);
         nuevaPartida.setVisible(true);
         this.setEnabled(false);
     }//GEN-LAST:event_btnNuevaPartidaActionPerformed
 
     private void btnGuardarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarJugadoresActionPerformed
+        reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
+        
         JFileChooser chooser = new JFileChooser();
         String ruta = null;
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -584,12 +596,16 @@ public class Interfaz extends javax.swing.JFrame {
         }    }//GEN-LAST:event_btnGuardarJugadoresActionPerformed
 
     private void btnAgregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarJugadorActionPerformed
+        reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
+        
         AgregarJugador ventana= new AgregarJugador(this);
         this.setEnabled(false);
         ventana.setVisible(true);
     }//GEN-LAST:event_btnAgregarJugadorActionPerformed
 
     private void btnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRankingActionPerformed
+        reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
+        
         Ranking ventana= new Ranking(this);
         this.setEnabled(false);
         ventana.setVisible(true);     }//GEN-LAST:event_btnRankingActionPerformed
@@ -726,8 +742,8 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
     private void clickBoton(int fila, int columna) {
-        reproducirSonido(getClass().getResource("/multimedia/tap-warm.aif"));
         if(botones[fila][columna].getBackground().equals(colorMovimientosValidos)){
+            reproducirSonido(getClass().getResource("/multimedia/slide-paper.wav"));
             int mov = columna - fichaSeleccionada.getX();
             
             String movi = "A";
@@ -756,6 +772,7 @@ public class Interfaz extends javax.swing.JFrame {
             fichaSeleccionada = null;
         }
         else if (botones[fila][columna].getBackground() != Color.GRAY){
+            reproducirSonido(getClass().getResource("/multimedia/tap-warm.aif"));
             boolean esJugadorUno = botones[fila][columna].getBackground() == colorJugadorUnoValido;
             boolean esJugadorDos = botones[fila][columna].getBackground() == colorJugadorDosValido;
             
@@ -773,6 +790,8 @@ public class Interfaz extends javax.swing.JFrame {
 
             fichaSeleccionada = new Ficha(columna, fila, f, esJugadorUno);
         }
+        else
+            reproducirSonido(getClass().getResource("/multimedia/tap-warm.aif"));
     }
 
     private void terminarPartida(boolean esReplicar){
