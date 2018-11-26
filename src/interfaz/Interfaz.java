@@ -578,7 +578,10 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnGuardarJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarJugadoresActionPerformed
         reproducirSonido(getClass().getResource("/multimedia/tap-crisp.aif"));
-        
+        if(sistema.getJugadores().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Aún no se han registrado jugadores","No hay jugadores",JOptionPane.INFORMATION_MESSAGE);
+
+        }else{
         JFileChooser chooser = new JFileChooser();
         String ruta = null;
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -592,6 +595,7 @@ public class Interfaz extends javax.swing.JFrame {
                 ruta += ".json";
         
             sistema.guardarJugadores(ruta);
+        }
         }    }//GEN-LAST:event_btnGuardarJugadoresActionPerformed
 
     private void btnAgregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarJugadorActionPerformed
