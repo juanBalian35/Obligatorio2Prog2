@@ -229,23 +229,24 @@ public class AgregarJugador extends javax.swing.JFrame {
      Sistema sistema = interfaz.getSistema();
      String alias="", nombre="";
      int edad=(int)spinnerEdad.getValue();
-        if(txtNombre.getText().isEmpty()){
+        if(txtNombre.getText().trim().isEmpty()){
           lblErrorNombre.setVisible(true);
           lblErrorNombre.setToolTipText("Ingrese un nombre");
-      }else{
+      }
+        else{
           nombre = txtNombre.getText();
       }
       
-      if(txtAlias.getText().isEmpty()){
+      if(txtAlias.getText().trim().isEmpty()){
           lblErrorAlias.setVisible(true);
           lblErrorAlias.setToolTipText("Ingrese un alias");
-      }else if (null != sistema.buscarJugador(txtAlias.getText())){
+      }
+      else if (null != sistema.buscarJugador(txtAlias.getText())){
           lblErrorAlias.setVisible(true);
           lblErrorAlias.setToolTipText("Alias en uso");
-      }else{
+      }
+      else{
           alias = txtAlias.getText();
-         
-          
       }
       if(!alias.isEmpty() && !nombre.isEmpty()){
             Jugador jugador = new Jugador(nombre, alias, edad);
