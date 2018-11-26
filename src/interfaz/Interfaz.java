@@ -65,7 +65,6 @@ public class Interfaz extends javax.swing.JFrame {
         ImageIcon img = new ImageIcon(getClass().getResource("/multimedia/icons8-controller_filled.png"));
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/multimedia/icons8-controller_filled.png")));
 
-        
         botonMenuEnablear(btnPasarTurno, false);
         botonMenuEnablear(btnAbandonar, false);
         
@@ -772,15 +771,18 @@ public class Interfaz extends javax.swing.JFrame {
             fichaSeleccionada = null;
         }
         else if (botones[fila][columna].getBackground() != Color.GRAY){
-            reproducirSonido(getClass().getResource("/multimedia/tap-warm.aif"));
             boolean esJugadorUno = botones[fila][columna].getBackground() == colorJugadorUnoValido;
             boolean esJugadorDos = botones[fila][columna].getBackground() == colorJugadorDosValido;
             
             limpiarCeldasVerdes();
             
-            if(!((jugadorActivo == 0 && esJugadorUno) || (jugadorActivo == 1 && esJugadorDos)))
+            if(!((jugadorActivo == 0 && esJugadorUno) || (jugadorActivo == 1 && esJugadorDos))){
+                reproducirSonido(getClass().getResource("/multimedia/beep-attention.aif"));
                 return;
+            }
             
+            reproducirSonido(getClass().getResource("/multimedia/tap-warm.aif"));
+
             ArrayList<Integer> posPosibles = partida.posicionesPosibles(columna, fila, esJugadorUno);
 
             for(int i = 0; i < posPosibles.size(); i+=2)
@@ -791,7 +793,7 @@ public class Interfaz extends javax.swing.JFrame {
             fichaSeleccionada = new Ficha(columna, fila, f, esJugadorUno);
         }
         else
-            reproducirSonido(getClass().getResource("/multimedia/tap-warm.aif"));
+            reproducirSonido(getClass().getResource("/multimedia/beep-attention.aif"));
     }
 
     private void terminarPartida(boolean esReplicar){
