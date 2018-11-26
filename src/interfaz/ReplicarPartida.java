@@ -73,8 +73,8 @@ public class ReplicarPartida extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnSalir = new javax.swing.JButton();
         btnReplicar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -138,19 +138,6 @@ public class ReplicarPartida extends javax.swing.JFrame {
         jPanel1.setBackground(Interfaz.colorFondo);
         jPanel1.setLayout(new java.awt.GridLayout(1, 2, 10, 0));
 
-        btnSalir.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
-        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-cancel.png"))); // NOI18N
-        btnSalir.setText("Salir");
-        btnSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        btnSalir.setContentAreaFilled(false);
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnSalir);
-
         btnReplicar.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
         btnReplicar.setForeground(new java.awt.Color(255, 255, 255));
         btnReplicar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-rotate.png"))); // NOI18N
@@ -163,6 +150,19 @@ public class ReplicarPartida extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnReplicar);
+
+        btnSalir.setFont(new java.awt.Font("Heiti SC", 0, 14)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-cancel.png"))); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        btnSalir.setContentAreaFilled(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSalir);
 
         jPanel2.add(jPanel1);
         jPanel1.setBounds(110, 160, 230, 60);
