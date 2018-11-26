@@ -76,7 +76,7 @@ public class NuevaPartida extends javax.swing.JFrame {
         colorListaAzul = jListAzul.getSelectionBackground();
         colorListaRoja = jListRojo.getSelectionBackground();
         
-        if(interfaz.getSistema().getJugadores().isEmpty()){
+        if(interfaz.getSistema().getJugadores().size() < 2){
             jPanel1.setVisible(false);
             btnIniciarPartida.setEnabled(false);
         }

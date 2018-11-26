@@ -492,7 +492,7 @@ public class Interfaz extends javax.swing.JFrame {
             jugadorActivo = jugadorActivo == 0 ? 1 : 0;
             
             terminarPartida(false);
-        }  
+        }
     }//GEN-LAST:event_btnAbandonarActionPerformed
 
     private void btnPasarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasarTurnoActionPerformed
@@ -515,7 +515,7 @@ public class Interfaz extends javax.swing.JFrame {
             botonMenuEnablear(btnRetomarPartida, false);
             movimientosReplicar = null;
             
-            //Si abandona el jugador activo, el ganador es el otro4
+            //Si abandona el jugador activo, el ganador es el otro
             jugadorActivo = Integer.parseInt(mov.charAt(2) + "");
             
             partida.hacerMovimiento("X", jugadorActivo);
@@ -658,6 +658,7 @@ public class Interfaz extends javax.swing.JFrame {
         panelReplicarPartida.setVisible(true);
         panelTransparente.setVisible(false);
         lblAzul.setVisible(true);
+        lblRojo.setVisible(true);
         
         lblAzul.setText(p.getJugadores()[0].getAlias());
         lblAzul.setForeground(Color.RED);
@@ -680,6 +681,13 @@ public class Interfaz extends javax.swing.JFrame {
             for(Jugador ja : p.getJugadores())
                 if(j.getAlias().equals(ja.getAlias()))
                     jugadores[i++] = j;
+        
+        // Si no estan en el mismo orden que el anterior, que esten
+        if(!jugadores[0].equals(p.getJugadores()[0])){
+            Jugador temp = jugadores[0];
+            jugadores[0] = jugadores[1];
+            jugadores[1] = temp;
+        }
         
         partida = new Partida(jugadores, p.getFormaDeTerminar(), fecha, p.getCantMovimientos());
         
@@ -767,6 +775,7 @@ public class Interfaz extends javax.swing.JFrame {
             botonMenuEnablear(btnPasarTurno,!fichasValidas.isEmpty());
             
             if(fichasValidas.isEmpty()){
+                System.out.println("mejor kambiemo");
                 jugadorActivo = jugadorActivo == 0 ? 1 : 0;
                 lblAzul.setText(partida.getJugadores()[jugadorActivo].getAlias());
                 lblAzul.setForeground(jugadorActivo == 0 ? Color.RED : Color.BLUE);
