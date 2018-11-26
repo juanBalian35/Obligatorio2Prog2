@@ -7,6 +7,7 @@ import dominio.Sistema;
 import dominio.Tablero;
 import java.awt.Color;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -62,7 +63,8 @@ public class Interfaz extends javax.swing.JFrame {
         lblRojo.setVisible(false);
         
         ImageIcon img = new ImageIcon(getClass().getResource("/multimedia/icons8-controller_filled.png"));
-        setIconImage(img.getImage());
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/multimedia/icons8-controller_filled.png")));
+
         
         botonMenuEnablear(btnPasarTurno, false);
         botonMenuEnablear(btnAbandonar, false);
@@ -200,7 +202,7 @@ public class Interfaz extends javax.swing.JFrame {
         LblMovimientosRestantes.setForeground(colorBotonesVacios);
         LblMovimientosRestantes.setText("Movimientos restantes:");
         jPanel1.add(LblMovimientosRestantes);
-        LblMovimientosRestantes.setBounds(40, 500, 184, 24);
+        LblMovimientosRestantes.setBounds(40, 500, 220, 20);
 
         jPanel2.setBackground(colorFondo);
 
@@ -300,7 +302,7 @@ public class Interfaz extends javax.swing.JFrame {
         lblMovRest.setFont(new java.awt.Font("Heiti TC", 2, 18)); // NOI18N
         lblMovRest.setForeground(colorBarra);
         jPanel1.add(lblMovRest);
-        lblMovRest.setBounds(260, 500, 50, 20);
+        lblMovRest.setBounds(270, 500, 50, 20);
 
         btnSonido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/icons8-room_sound_filled.png"))); // NOI18N
         btnSonido.setBorderPainted(false);

@@ -137,6 +137,7 @@ public class Ranking extends javax.swing.JFrame {
             }
         ));
         jTabla.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        jTabla.setSelectionBackground(Interfaz.colorBarra);
         jTabla.getTableHeader().setReorderingAllowed(false);
         jSP.setViewportView(jTabla);
         //jTabla.getColumnModel().getColumn(0).setPreferredWidth(10);

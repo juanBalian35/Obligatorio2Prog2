@@ -121,6 +121,7 @@ public class ReplicarPartida extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setSelectionBackground(Interfaz.colorBarra);
         jScrollPane1.setViewportView(jTable1);
 
         jPanel2.add(jScrollPane1);
